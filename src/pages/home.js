@@ -1,17 +1,11 @@
 import React from 'react';
 import {Text, View, StyleSheet, StatusBar, ScrollView} from 'react-native';
+import Header from '../components/Header';
 
 const home = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.stackBar}>
-        <View style={styles.stackBar_start}>
-          <Text style={styles.txtStack}>Agosto</Text>
-        </View>
-        <View style={styles.stackBar_end}>
-          <Text style={styles.txtStack}>:</Text>
-        </View>
-      </View>
+      <Header title="Agosto" />
       <StatusBar barStyle="light-content" backgroundColor="#f39c12ff" />
       <View style={styles.viewSaldo}>
         <Text style={styles.txtSaldo}>R$ 9.857,96</Text>
