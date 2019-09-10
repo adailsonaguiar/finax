@@ -5,7 +5,7 @@ import Header from '../components/Header';
 const despesas = () => {
   return (
     <View>
-      <Header title="Tweets" />
+      <Header title="Despesas" />
       <Text>Tela Despesas</Text>
     </View>
   );
