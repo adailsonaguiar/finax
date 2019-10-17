@@ -1,11 +1,7 @@
-import {
-  createAppContainer,
-  createStackNavigator,
-  createBottomTabNavigator,
-} from 'react-navigation';
+import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
 
-import Home from './pages/home';
-import Despesas from './pages/despesas';
+import Home from './pages/Home';
+import Despesas from './pages/Despesas';
 
 export default createAppContainer(
   createBottomTabNavigator(
