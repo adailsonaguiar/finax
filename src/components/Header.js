@@ -6,7 +6,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Header = ({ title }) => (
   <View style={styles.container}>
     <View style={styles.left}>
-      <Icon size={23} name="rocket" color="#fff" />
+      <Icon name="rocket" size={30} color="#900" />
+      <Icon size={23} name="add" color="#fff" />
     </View>
     <Text style={styles.title}>{title}</Text>
     <TouchableOpacity style={styles.right}>
