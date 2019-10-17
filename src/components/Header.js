@@ -1,16 +1,16 @@
-/* eslint-disable linebreak-style */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Header = ({title}) => (
+const Header = ({ title }) => (
   <View style={styles.container}>
     <View style={styles.left}>
-      <Icon size={23} name="rocket" color="#fff" />
+      <Icon name="rocket" size={30} color="#900" />
+      <Icon size={23} name="add" color="#fff" />
     </View>
     <Text style={styles.title}>{title}</Text>
-    <TouchableOpacity onPress={() => {}} style={styles.right}>
+    <TouchableOpacity style={styles.right}>
       <Icon name="facebook" color="#fff" size={23} />
     </TouchableOpacity>
   </View>

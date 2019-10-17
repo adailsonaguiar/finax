@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text, View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import Header from '../components/Header';
+import { Text, View, StyleSheet, StatusBar, ScrollView } from 'react-native';
+import Header from '../../components/Header';
 
-const home = () => {
+const Home = () => {
   return (
     <View style={styles.container}>
       <Header title="Agosto" />
@@ -21,7 +21,7 @@ const home = () => {
               <Text style={styles.txtIntro}>Receitas</Text>
             </View>
             <View style={styles.stackBar_end}>
-              <Text style={{color: '#3498dbff'}}>R$ 3.616,66</Text>
+              <Text style={{ color: '#3498dbff' }}>R$ 3.616,66</Text>
             </View>
           </View>
           <View style={styles.viewRow}>
@@ -29,7 +29,7 @@ const home = () => {
               <Text style={styles.txtIntro}>Despesas</Text>
             </View>
             <View style={styles.stackBar_end}>
-              <Text style={{color: '#f39c12ff'}}>R$ 342,32</Text>
+              <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
             </View>
           </View>
         </View>
@@ -42,17 +42,17 @@ const home = () => {
               <Text style={styles.txtIntro}>Gráfico</Text>
             </View>
             <View style={styles.stackBar_end}>
-              <Text style={{color: '#2ecc71ff', fontSize: 20}}>R$ 342,32</Text>
+              <Text style={{ color: '#2ecc71ff', fontSize: 20 }}>asd</Text>
             </View>
           </View>
         </View>
-        <View style={styles.viewGeral}></View>
+        <View style={styles.viewGeral} />
       </ScrollView>
     </View>
   );
 };
 
-export default home;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
