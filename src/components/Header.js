@@ -1,23 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Header = ({ title }) => (
   <View style={styles.container}>
-    <View style={styles.left}>
-      <Icon name="rocket" size={30} color="#900" />
-      <Icon size={23} name="add" color="#fff" />
-    </View>
     <Text style={styles.title}>{title}</Text>
-    <TouchableOpacity style={styles.right}>
-      <Icon name="facebook" color="#fff" size={23} />
+    <TouchableOpacity style={styles.stackBar_end}>
+      <Icon name="build" color="#fff" size={16} />
     </TouchableOpacity>
   </View>
 );
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 export default Header;
@@ -30,22 +26,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingStart: 20,
     paddingEnd: 20,
+    justifyContent: 'space-between'
   },
   title: {
-    color: 'white',
+    color: 'white'
   },
   stackBar_start: {
     flexDirection: 'row',
     width: '50%',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   stackBar_end: {
-    flexDirection: 'row',
-    width: '50%',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
   txtStack: {
     color: '#fff',
-    alignSelf: 'flex-end',
-  },
+    justifyContent: 'flex-end'
+  }
 });
