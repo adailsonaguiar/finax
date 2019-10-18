@@ -1,5 +1,9 @@
 import React from 'react';
-import { createAppContainer, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {
+  createAppContainer,
+  createStackNavigator,
+  createBottomTabNavigator
+} from 'react-navigation';
 
 import Home from './pages/Home';
 import Despesas from './pages/Despesas';
@@ -13,7 +17,7 @@ export default createAppContainer(
         screen: Home,
         navigationOptions: () => ({
           tabBarIcon: ({ tintColor }) => (
-            <Icon name="home" color={tintColor} size={18} />
+            <Icon name="home" color={tintColor} size={22} />
           )
         })
       },
@@ -21,7 +25,7 @@ export default createAppContainer(
         screen: Despesas,
         navigationOptions: {
           tabBarIcon: ({ tintColor }) => (
-            <Icon name="money-bill-alt" color={tintColor} size={18} />
+            <Icon name="money-bill-alt" color={tintColor} size={22} />
           )
         }
       }
@@ -32,7 +36,7 @@ export default createAppContainer(
         headerTitle: 'Agosto',
         tabBarOptions: {
           activeTintColor: '#f39c12ff',
-          showLabel: true
+          showLabel: false
         }
       },
       mode: 'modal'
