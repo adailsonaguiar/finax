@@ -13,7 +13,7 @@ export default createAppContainer(
         screen: Home,
         navigationOptions: () => ({
           tabBarIcon: ({ tintColor }) => (
-            <Icon name="home" color={tintColor} size={24} />
+            <Icon name="home" color={tintColor} size={18} />
           )
         })
       },
@@ -21,7 +21,7 @@ export default createAppContainer(
         screen: Despesas,
         navigationOptions: {
           tabBarIcon: ({ tintColor }) => (
-            <Icon name="money-bill-alt" color={tintColor} size={24} />
+            <Icon name="money-bill-alt" color={tintColor} size={18} />
           )
         }
       }
@@ -31,7 +31,7 @@ export default createAppContainer(
         headerTintColor: '#000',
         headerTitle: 'Agosto',
         tabBarOptions: {
-          activeTintColor: '#e91e63',
+          activeTintColor: '#f39c12ff',
           showLabel: true
         }
       },
