@@ -23,9 +23,10 @@ const Despesas = () => {
       </View>
       <View style={styles.card}>
         <ScrollView>
-          <View style={styles.row}>
+          <View style={styles.rowDespesa}>
             <View style={styles.col}>
-              <Text style={styles.txtIntro}>Despesas</Text>
+              <Text style={styles.txtIntro}>Churrascaria flor do nordeste</Text>
+              <Text style={{ fontSize: 10 }}>Alimentação</Text>
             </View>
             <View style={styles.col}>
               <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
@@ -148,5 +149,10 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 7,
     flexDirection: 'column'
+  },
+  rowDespesa: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
   }
 });
