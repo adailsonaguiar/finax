@@ -12,7 +12,7 @@ const Home = () => {
         <Text style={styles.txtDescricao}>Saldo Receitas</Text>
       </View>
       <ScrollView>
-        <View style={styles.viewGeral}>
+        <View style={styles.cardGeral}>
           <View>
             <Text>VISÃO GERAL</Text>
           </View>
@@ -33,7 +33,7 @@ const Home = () => {
             </View>
           </View>
         </View>
-        <View style={styles.viewGeral}>
+        <View style={styles.cardGeral}>
           <View>
             <Text>ECONOMIA DO MÊS</Text>
           </View>
@@ -46,7 +46,7 @@ const Home = () => {
             </View>
           </View>
         </View>
-        <View style={styles.viewGeral} />
+        <View style={styles.cardGeral} />
       </ScrollView>
     </View>
   );
@@ -97,11 +97,11 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 15,
   },
-  viewGeral: {
+  cardGeral: {
     backgroundColor: 'white',
     height: 200,
     margin: 10,
-    borderRadius: 25,
+    borderRadius: 17,
     padding: 20,
   },
   viewRow: {
