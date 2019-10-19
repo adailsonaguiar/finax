@@ -7,7 +7,7 @@ import {
 
 import Home from './pages/Home';
 import Despesas from './pages/Despesas';
-import Receitas from './pages/Receitas';
+import Carteiras from './pages/Carteiras';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -30,8 +30,8 @@ export default createAppContainer(
           )
         }
       },
-      Receitas: {
-        screen: Receitas,
+      Carteiras: {
+        screen: Carteiras,
         navigationOptions: {
           tabBarIcon: ({ tintColor }) => (
             <Icon name="wallet" color={tintColor} size={22} />

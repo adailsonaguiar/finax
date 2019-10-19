@@ -2,13 +2,13 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import Header from '../../components/Header';
 
-const Receitas = () => {
+const Carteiras = () => {
   return (
     <View>
-      <Header title="Receitas" />
-      <Text>Tela Receitas</Text>
+      <Header title="Carteiras" />
+      <Text>Tela Carteiras</Text>
     </View>
   );
 };
 
-export default Receitas;
+export default Carteiras;
