@@ -23,66 +23,36 @@ const Despesas = () => {
       </View>
       <View style={styles.card}>
         <ScrollView>
-          <View style={styles.rowDespesa}>
-            <View style={styles.row}>
+          <View style={styles.despesa}>
+            <View style={styles.rowDespesa}>
               <Text style={styles.txtIntro}>Churrascaria flor do nordeste</Text>
-              <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
+              <Text style={styles.valorDespesa}>R$ 342,32</Text>
             </View>
-            <View style={styles.row}>
+            <View style={styles.rowDespesa}>
               <View style={styles.observacao}>
-                <Text style={{ fontSize: 10 }}>Alimentação</Text>
+                <Text style={styles.detalhesDespesa}>Alimentação</Text>
               </View>
               <View style={styles.observacao}>
-                <Text style={{ fontSize: 10 }}>30/10/2019</Text>
+                <Text style={styles.detalhesDespesa}>30/10/2019</Text>
               </View>
-              <Text style={{ fontSize: 10 }}>Pago</Text>
+              <Text style={styles.detalhesDespesa}>Pago</Text>
             </View>
           </View>
-          <View style={styles.rowDespesa}>
-            <View style={styles.row}>
+          <View style={styles.despesa}>
+            <View style={styles.rowDespesa}>
               <Text style={styles.txtIntro}>Churrascaria flor do nordeste</Text>
-              <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
+              <Text style={styles.valorDespesa}>R$ 342,32</Text>
             </View>
-            <View style={styles.row}>
+            <View style={styles.rowDespesa}>
               <View style={styles.observacao}>
-                <Text style={{ fontSize: 10 }}>Alimentação llkas</Text>
+                <Text style={styles.detalhesDespesa}>Alimentação llkas</Text>
               </View>
               <View style={styles.observacao}>
-                <Text style={{ fontSize: 10 }}>30/10/2019</Text>
+                <Text style={styles.detalhesDespesa}>30/10/2019</Text>
               </View>
-              <Text style={{ fontSize: 10 }}>Pago</Text>
+              <Text style={styles.detalhesDespesa}>Pago</Text>
             </View>
           </View>
-          {/* <View style={styles.rowDespesa}>
-            <View style={styles.col}>
-              <Text style={styles.txtIntro}>Churrascaria flor do nordeste</Text>
-              <Text style={{ fontSize: 10 }}>Alimentação</Text>
-            </View>
-            <View style={styles.col}>
-              <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
-              <Text style={{ fontSize: 10 }}>Pago</Text>
-            </View>
-          </View>
-          <View style={styles.rowDespesa}>
-            <View style={styles.col}>
-              <Text style={styles.txtIntro}>Churrascaria flor do nordeste</Text>
-              <Text style={{ fontSize: 10 }}>Alimentação</Text>
-            </View>
-            <View style={styles.col}>
-              <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
-              <Text style={{ fontSize: 10 }}>Pago</Text>
-            </View>
-          </View>
-          <View style={styles.rowDespesa}>
-            <View style={styles.col}>
-              <Text style={styles.txtIntro}>Churrascaria flor do nordeste</Text>
-              <Text style={{ fontSize: 10 }}>Alimentação</Text>
-            </View>
-            <View style={styles.col}>
-              <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
-              <Text style={{ fontSize: 10 }}>Pago</Text>
-            </View>
-          </View> */}
         </ScrollView>
       </View>
     </View>
@@ -110,7 +80,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginBottom: 10,
     borderBottomColor: '#5c5151'
   },
@@ -133,12 +103,25 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'column'
   },
-  rowDespesa: {
+  despesa: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginBottom: 10
   },
   observacao: {
     width: 60
+  },
+  rowDespesa: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    borderBottomColor: '#5c5151'
+  },
+  detalhesDespesa: {
+    fontSize: 10,
+    color: '#8a8a8a'
+  },
+  valorDespesa: {
+    color: '#eb5454'
   }
 });
