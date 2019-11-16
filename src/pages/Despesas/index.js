@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, Button } from 'react-native';
 import Header from '../../components/Header';
+import { Container } from './styles';
 
-const Despesas = () => {
+const Despesas = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Header title="Despesas" />
+    <Container>
+      <Header title='Despesas' />
       <View style={styles.cardHeader}>
         <View style={styles.row}>
           <Text style={styles.vwMes}>Outubro </Text>
@@ -36,6 +37,10 @@ const Despesas = () => {
                 <Text style={styles.detalhesDespesa}>30/10/2019</Text>
               </View>
               <Text style={styles.detalhesDespesa}>Pago</Text>
+              <Button
+                onPress={() => navigation.navigate('NovaDespesa')}
+                title='Nova'
+              />
             </View>
           </View>
           <View style={styles.despesa}>
@@ -45,7 +50,7 @@ const Despesas = () => {
             </View>
             <View style={styles.rowDespesa}>
               <View style={styles.observacao}>
-                <Text style={styles.detalhesDespesa}>Alimentação llkas</Text>
+                <Text style={styles.detalhesDespesa}>Alimentação</Text>
               </View>
               <View style={styles.observacao}>
                 <Text style={styles.detalhesDespesa}>30/10/2019</Text>
@@ -55,17 +60,13 @@ const Despesas = () => {
           </View>
         </ScrollView>
       </View>
-    </View>
+    </Container>
   );
 };
 
 export default Despesas;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f2f2f2ff',
-    flex: 1
-  },
   cardHeader: {
     backgroundColor: 'white',
     height: 100,

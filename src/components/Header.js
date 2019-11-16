@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Header = ({ title }) => (
+const Header = ({ title, navigation }) => (
   <View style={styles.container}>
     <Text style={styles.title}>{title}</Text>
-    <TouchableOpacity style={styles.stackBar_end}>
-      <Icon name="build" color="#fff" size={16} />
+    <TouchableOpacity
+      style={styles.stackBar_end}
+      onPress={() => navigation.navigate('NovaDespesa')}
+    >
+      <Icon name='build' color='#fff' size={16} />
     </TouchableOpacity>
   </View>
 );

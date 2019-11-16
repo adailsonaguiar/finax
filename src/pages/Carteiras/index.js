@@ -1,12 +1,13 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import Header from '../../components/Header';
 
-const Carteiras = () => {
+const Carteiras = ({ navigation }) => {
   return (
     <View>
-      <Header title="Carteiras" />
+      <Header title='Carteiras' />
       <Text>Tela Carteiras</Text>
+      <Button onPress={() => navigation.navigate('NovaDespesa')} title='Nova' />
     </View>
   );
 };
