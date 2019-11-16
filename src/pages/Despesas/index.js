@@ -64,7 +64,12 @@ const Despesas = ({ navigation }) => {
   return (
     <Container>
       <Header title='Despesas' />
-      <Button onPress={cadastrarDespesa} title='Nova' />
+      <Button
+        onPress={() => {
+          navigation.navigate('NovaDespesa');
+        }}
+        title='Nova'
+      />
       <CardHeader>
         <Row>
           <Text>Outubro </Text>
