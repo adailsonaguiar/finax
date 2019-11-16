@@ -3,6 +3,14 @@ import { Text, View, StyleSheet, StatusBar, ScrollView } from 'react-native';
 import Header from '../../components/Header';
 import { Container, CompHead } from './styles';
 
+import {
+  Transacao,
+  RowTransacao,
+  ValorTransacao,
+  DetalhesTransacao,
+  TitleTransacao
+} from './../../components/TransacaoStyles';
+
 const Home = () => {
   return (
     <Container>
@@ -13,7 +21,7 @@ const Home = () => {
         <Text style={styles.txtDescricao}>Saldo Receitas</Text>
       </CompHead>
       <ScrollView>
-        <View style={styles.cardGeral}>
+        {/*  <View style={styles.cardGeral}>
           <View>
             <Text>VISÃO GERAL</Text>
           </View>
@@ -33,21 +41,113 @@ const Home = () => {
               <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
             </View>
           </View>
-        </View>
-        <View style={styles.cardGeral}>
-          <View>
-            <Text>ECONOMIA DO MÊS</Text>
-          </View>
-          <View style={styles.viewRow}>
-            <View style={styles.stackBar_start}>
-              <Text style={styles.txtIntro}>Gráfico</Text>
+        </View> */}
+
+        <Transacao>
+          <RowTransacao>
+            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
+            <ValorTransacao>R$ 342,32</ValorTransacao>
+          </RowTransacao>
+          <RowTransacao>
+            <View>
+              <DetalhesTransacao>Alimentação</DetalhesTransacao>
             </View>
-            <View style={styles.stackBar_end}>
-              <Text style={{ color: '#2ecc71ff', fontSize: 20 }}>asd</Text>
+            <View>
+              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
             </View>
-          </View>
-        </View>
-        <View style={styles.cardGeral} />
+            <Text>Pago</Text>
+          </RowTransacao>
+        </Transacao>
+        <Transacao>
+          <RowTransacao>
+            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
+            <ValorTransacao>R$ 342,32</ValorTransacao>
+          </RowTransacao>
+          <RowTransacao>
+            <View>
+              <DetalhesTransacao>Alimentação</DetalhesTransacao>
+            </View>
+            <View>
+              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
+            </View>
+            <Text>Pago</Text>
+          </RowTransacao>
+        </Transacao>
+        <Transacao>
+          <RowTransacao>
+            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
+            <ValorTransacao>R$ 342,32</ValorTransacao>
+          </RowTransacao>
+          <RowTransacao>
+            <View>
+              <DetalhesTransacao>Alimentação</DetalhesTransacao>
+            </View>
+            <View>
+              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
+            </View>
+            <Text>Pago</Text>
+          </RowTransacao>
+        </Transacao>
+        <Transacao>
+          <RowTransacao>
+            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
+            <ValorTransacao>R$ 342,32</ValorTransacao>
+          </RowTransacao>
+          <RowTransacao>
+            <View>
+              <DetalhesTransacao>Alimentação</DetalhesTransacao>
+            </View>
+            <View>
+              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
+            </View>
+            <Text>Pago</Text>
+          </RowTransacao>
+        </Transacao>
+        <Transacao>
+          <RowTransacao>
+            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
+            <ValorTransacao>R$ 342,32</ValorTransacao>
+          </RowTransacao>
+          <RowTransacao>
+            <View>
+              <DetalhesTransacao>Alimentação</DetalhesTransacao>
+            </View>
+            <View>
+              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
+            </View>
+            <Text>Pago</Text>
+          </RowTransacao>
+        </Transacao>
+        <Transacao>
+          <RowTransacao>
+            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
+            <ValorTransacao>R$ 342,32</ValorTransacao>
+          </RowTransacao>
+          <RowTransacao>
+            <View>
+              <DetalhesTransacao>Alimentação</DetalhesTransacao>
+            </View>
+            <View>
+              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
+            </View>
+            <Text>Pago</Text>
+          </RowTransacao>
+        </Transacao>
+        <Transacao>
+          <RowTransacao>
+            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
+            <ValorTransacao>R$ 342,32</ValorTransacao>
+          </RowTransacao>
+          <RowTransacao>
+            <View>
+              <DetalhesTransacao>Alimentação</DetalhesTransacao>
+            </View>
+            <View>
+              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
+            </View>
+            <Text>Pago</Text>
+          </RowTransacao>
+        </Transacao>
       </ScrollView>
     </Container>
   );
@@ -91,7 +191,7 @@ const styles = StyleSheet.create({
   },
   cardGeral: {
     backgroundColor: 'white',
-    height: 200,
+    height: 130,
     margin: 10,
     borderRadius: 17,
     padding: 20

@@ -1,128 +1,109 @@
-import React from 'react';
-import { Text, View, StyleSheet, ScrollView, Button } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, ScrollView, Button } from 'react-native';
 import Header from '../../components/Header';
-import { Container } from './styles';
+import {
+  Container,
+  TitleGrid,
+  Grid,
+  CardHeader,
+  Col,
+  Row,
+  TotalPago,
+  TotalPendente
+} from './styles';
+import {
+  Transacao,
+  RowTransacao,
+  ValorTransacao,
+  DetalhesTransacao,
+  TitleTransacao
+} from './../../components/TransacaoStyles';
 
 const Despesas = ({ navigation }) => {
+  const [despesas, setDespesas] = useState([
+    {
+      title: 'Churrascaria Norte Sul',
+      value: 50.22,
+      date: '23/11/2019',
+      category: 'Alimentação',
+      status: 'pago',
+      id: 1
+    },
+    {
+      title: 'Serra verde - óleo moto',
+      value: 29,
+      date: '24/11/2019',
+      category: 'Veículo',
+      status: 'pendente',
+      id: 2
+    },
+    {
+      title: 'Big Lanches',
+      value: 15.43,
+      date: '10/11/2019',
+      category: 'Alimentação',
+      status: 'pago',
+      id: 3
+    }
+  ]);
+
+  const cadastrarDespesa = () => {
+    setDespesas(value => [
+      ...value,
+      {
+        title: 'Big Lanches',
+        value: 15.43,
+        date: '10/11/2019',
+        category: 'Alimentação',
+        status: 'pago'
+      }
+    ]);
+    console.log(despesas);
+  };
+
   return (
     <Container>
       <Header title='Despesas' />
-      <View style={styles.cardHeader}>
-        <View style={styles.row}>
-          <Text style={styles.vwMes}>Outubro </Text>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.col}>
+      <Button onPress={cadastrarDespesa} title='Nova' />
+      <CardHeader>
+        <Row>
+          <Text>Outubro </Text>
+        </Row>
+        <Row>
+          <Col>
             <Text>Total pago</Text>
-            <Text style={styles.vlrPago}>R$ 342,32</Text>
-          </View>
-          <View style={styles.col}>
+            <TotalPago>R$ 342,32</TotalPago>
+          </Col>
+          <Col>
             <Text>Total pendente</Text>
-            <Text style={styles.vlrPendente}>R$ 342,32</Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.card}>
+            <TotalPendente>R$ 342,32</TotalPendente>
+          </Col>
+        </Row>
+      </CardHeader>
+      <Grid>
+        <TitleGrid>Suas Despesas</TitleGrid>
         <ScrollView>
-          <View style={styles.despesa}>
-            <View style={styles.rowDespesa}>
-              <Text style={styles.txtIntro}>Churrascaria flor do nordeste</Text>
-              <Text style={styles.valorDespesa}>R$ 342,32</Text>
-            </View>
-            <View style={styles.rowDespesa}>
-              <View style={styles.observacao}>
-                <Text style={styles.detalhesDespesa}>Alimentação</Text>
-              </View>
-              <View style={styles.observacao}>
-                <Text style={styles.detalhesDespesa}>30/10/2019</Text>
-              </View>
-              <Text style={styles.detalhesDespesa}>Pago</Text>
-              <Button
-                onPress={() => navigation.navigate('NovaDespesa')}
-                title='Nova'
-              />
-            </View>
-          </View>
-          <View style={styles.despesa}>
-            <View style={styles.rowDespesa}>
-              <Text style={styles.txtIntro}>Churrascaria flor do nordeste</Text>
-              <Text style={styles.valorDespesa}>R$ 342,32</Text>
-            </View>
-            <View style={styles.rowDespesa}>
-              <View style={styles.observacao}>
-                <Text style={styles.detalhesDespesa}>Alimentação</Text>
-              </View>
-              <View style={styles.observacao}>
-                <Text style={styles.detalhesDespesa}>30/10/2019</Text>
-              </View>
-              <Text style={styles.detalhesDespesa}>Pago</Text>
-            </View>
-          </View>
+          {despesas.map(despesa => (
+            <Transacao key={despesa.id}>
+              <RowTransacao>
+                <TitleTransacao>{despesa.title}</TitleTransacao>
+                <ValorTransacao>{despesa.value}</ValorTransacao>
+              </RowTransacao>
+              <RowTransacao>
+                <View>
+                  <DetalhesTransacao>{despesa.category}</DetalhesTransacao>
+                </View>
+                <View>
+                  <DetalhesTransacao>{despesa.date}</DetalhesTransacao>
+                </View>
+                <Text>{despesa.status}</Text>
+              </RowTransacao>
+            </Transacao>
+          ))}
         </ScrollView>
-      </View>
+      </Grid>
     </Container>
   );
 };
 
 export default Despesas;
-
-const styles = StyleSheet.create({
-  cardHeader: {
-    backgroundColor: 'white',
-    height: 100,
-    margin: 10,
-    borderRadius: 14,
-    padding: 20,
-    flexDirection: 'column'
-  },
-  col: {
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 10,
-    borderBottomColor: '#5c5151'
-  },
-  vlrPago: {
-    fontSize: 14,
-    color: '#3498dbff'
-  },
-  vlrPendente: {
-    fontSize: 14,
-    color: '#f39c12ff'
-  },
-  vwMes: {
-    fontWeight: 'bold'
-  },
-  card: {
-    backgroundColor: 'white',
-    height: 265,
-    margin: 10,
-    borderRadius: 14,
-    padding: 10,
-    flexDirection: 'column'
-  },
-  despesa: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginBottom: 10
-  },
-  observacao: {
-    width: 60
-  },
-  rowDespesa: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-    borderBottomColor: '#5c5151'
-  },
-  detalhesDespesa: {
-    fontSize: 10,
-    color: '#8a8a8a'
-  },
-  valorDespesa: {
-    color: '#eb5454'
-  }
-});
