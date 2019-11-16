@@ -1,16 +1,20 @@
 import styled from 'styled-components/native';
-import StyleSheet from 'react-native';
 
 export const Container = styled.View`
-  background: #fff;
+  background: white;
   flex: 1;
 `;
 
 export const CompHead = styled.View`
-  background: #f39c12ff;
+  background: #fff;
   flex-direction: column;
   align-items: center;
   padding: 30px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+`;
+export const TitleGrid = styled.Text`
+  color: #000;
+  font-size: 20px;
+  margin-left: 10px;
+  font-weight: 700;
+  margin-bottom: 20px;
 `;

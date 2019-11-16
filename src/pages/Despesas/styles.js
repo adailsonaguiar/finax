@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
+  background: white;
   flex: 1;
 `;
 export const TitleGrid = styled.Text`

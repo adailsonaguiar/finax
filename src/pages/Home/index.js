@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, StatusBar, ScrollView } from 'react-native';
 import Header from '../../components/Header';
-import { Container, CompHead } from './styles';
+import { Container, CompHead, TitleGrid } from './styles';
 
 import {
   Transacao,
@@ -15,11 +15,12 @@ const Home = () => {
   return (
     <Container>
       <Header title='Agosto' />
-      <StatusBar barStyle='light-content' backgroundColor='#f39c12ff' />
+      <StatusBar barStyle='dark-content' backgroundColor='#fff' />
       <CompHead>
         <Text style={styles.txtSaldo}>R$ 9.857,96</Text>
         <Text style={styles.txtDescricao}>Saldo Receitas</Text>
       </CompHead>
+      <TitleGrid>Histórico</TitleGrid>
       <ScrollView>
         {/*  <View style={styles.cardGeral}>
           <View>
@@ -180,12 +181,12 @@ const styles = StyleSheet.create({
   },
 
   txtSaldo: {
-    color: 'white',
+    color: '#f39c12ff',
     fontWeight: '500',
     fontSize: 25
   },
   txtDescricao: {
-    color: 'white',
+    color: '#f39c12ff',
     fontWeight: '500',
     fontSize: 15
   },

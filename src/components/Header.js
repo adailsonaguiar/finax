@@ -10,7 +10,7 @@ const Header = ({ title, navigation }) => (
       style={styles.stackBar_end}
       onPress={() => navigation.navigate('NovaDespesa')}
     >
-      <Icon name='build' color='#fff' size={16} />
+      <Icon name='build' color='#f39c12ff' size={16} />
     </TouchableOpacity>
   </View>
 );
@@ -23,7 +23,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f39c12ff',
+    backgroundColor: '#fff',
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   title: {
-    color: 'white'
+    color: '#f39c12ff'
   },
   stackBar_start: {
     flexDirection: 'row',
