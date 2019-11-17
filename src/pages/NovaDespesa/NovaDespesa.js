@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Picker } from 'react-native';
+import { Button, Picker, TouchableOpacity, Text } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { TextInputMask } from 'react-native-masked-text';
 
-import { Container, InputContainer } from './styles';
+import {
+  Container,
+  InputContainer,
+  ButtonContainer,
+  LabelButton
+} from './styles';
 
 export default NovaDespesa = ({ navigation }) => {
   const [category, setCategory] = useState('');
@@ -58,10 +63,11 @@ export default NovaDespesa = ({ navigation }) => {
           }}
         />
       </InputContainer>
-      <Button
-        onPress={() => navigation.navigate('Despesas')}
-        title='Despesas'
-      />
+      <TouchableOpacity onPress={() => navigation.navigate('Despesas')}>
+        <ButtonContainer>
+          <LabelButton>SALVAR</LabelButton>
+        </ButtonContainer>
+      </TouchableOpacity>
     </Container>
   );
 };
