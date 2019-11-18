@@ -16,7 +16,7 @@ export const InputContainer = styled.View`
 export const ButtonContainer = styled.View`
   justify-content: center;
   margin-bottom: 20px;
-  background: #f39c12ff;
+  background: ${props => props.theme.theme.background};
   border: 1px solid #f39c12ff;
   border-radius: 24px;
   height: 45px;
@@ -26,7 +26,7 @@ export const ButtonContainer = styled.View`
   align-items: center;
 `;
 export const LabelButton = styled.Text`
-  color: white;
+  color: ${props => props.theme.theme.color};
   font-size: 14px;
   font-weight: bold;
 `;
