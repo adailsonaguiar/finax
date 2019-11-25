@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import Header from '../../components/Header';
 import {Container, CompHead, TitleGrid} from './styles';
+import getRealm from './../../services/realm';
 
 import {
   Transacao,
@@ -12,6 +13,15 @@ import {
 } from './../../components/TransacaoStyles';
 
 const Home = () => {
+  const [transactions, setTransactions] = useState([]);
+
+  async function loadRepositories() {
+    const realm = await getRealm();
+    const data = realm.objects('Expense').sorted('id', 1);
+
+    setTransactions(data);
+  }
+
   return (
     <Container>
       <Header title="Agosto" />
@@ -44,7 +54,27 @@ const Home = () => {
           </View>
         </View> */}
 
-        <Transacao>
+        <ScrollView>
+          {transactions.map(despesa => (
+            <Transacao key={despesa.id}>
+              <RowTransacao>
+                <TitleTransacao>{despesa.title}</TitleTransacao>
+                <ValorTransacao>{despesa.value}</ValorTransacao>
+              </RowTransacao>
+              <RowTransacao>
+                <View>
+                  <DetalhesTransacao>{despesa.category}</DetalhesTransacao>
+                </View>
+                <View>
+                  <DetalhesTransacao>{despesa.date}</DetalhesTransacao>
+                </View>
+                <Text>{despesa.status}</Text>
+              </RowTransacao>
+            </Transacao>
+          ))}
+        </ScrollView>
+
+        {/*  <Transacao>
           <RowTransacao>
             <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
             <ValorTransacao>R$ 342,32</ValorTransacao>
@@ -148,7 +178,7 @@ const Home = () => {
             </View>
             <Text>Pago</Text>
           </RowTransacao>
-        </Transacao>
+        </Transacao> */}
       </ScrollView>
     </Container>
   );
