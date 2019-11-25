@@ -17,7 +17,8 @@ import {
 } from './styles';
 
 export default NovaDespesa = ({navigation}) => {
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(0);
+  const [type] = useState('expense');
   const [description, setDescription] = useState(0);
   const [value, setValue] = useState(0);
   const [date, setDate] = useState(0);
@@ -33,9 +34,16 @@ export default NovaDespesa = ({navigation}) => {
     console.log('get', data);
   }
 
-  async function saveExpense() {
+  async function getId() {
+    const realm = await getRealm();
+    setId(realm.objects('transaction').max('id') + 1);
+  }
+
+  async function saveTransaction() {
+    await getId();
     const data = {
       id,
+      type,
       description,
       value,
       date,
@@ -46,7 +54,7 @@ export default NovaDespesa = ({navigation}) => {
     const realm = await getRealm();
 
     realm.write(() => {
-      realm.create('Expense', data);
+      realm.create('transaction', data);
     });
 
     console.log(data);
@@ -129,7 +137,7 @@ export default NovaDespesa = ({navigation}) => {
                     style={{paddingLeft: 15, fontWeight: 'bold', fontSize: 17}}
                   />
                 </InputContainer>
-                <TouchableOpacity onPress={saveExpense}>
+                <TouchableOpacity onPress={saveTransaction}>
                   <ButtonContainer>
                     <LabelButton>SALVAR</LabelButton>
                   </ButtonContainer>

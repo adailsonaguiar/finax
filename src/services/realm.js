@@ -1,9 +1,9 @@
 import Realm from 'realm';
 
-import ExpenseSchema from '../schemas/ExpenseSchema';
+import TransactionSchema from '../schemas/TransactionSchema';
 
 export default function getRealm() {
   return Realm.open({
-    schema: [ExpenseSchema],
+    schema: [TransactionSchema],
   });
 }

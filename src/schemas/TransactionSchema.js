@@ -1,9 +1,10 @@
-export default class ExpenseSchema {
+export default class TransactionSchema {
   static schema = {
-    name: 'Expense',
+    name: 'transaction',
     primaryKey: 'id',
     properties: {
       id: {type: 'int', indexed: true},
+      type: 'string',
       description: 'string',
       value: 'string',
       date: 'string',
