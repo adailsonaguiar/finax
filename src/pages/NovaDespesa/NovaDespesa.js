@@ -38,6 +38,8 @@ export default NovaDespesa = ({navigation}) => {
 
   async function saveTransaction() {
     const id = await getId();
+   /*  const valueNegative = Number(value) * Number(-1);
+    console.log(valueNegative); */
     const data = {
       id,
       type,

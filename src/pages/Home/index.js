@@ -15,11 +15,10 @@ import {
 const Home = () => {
   const [transactions, setTransactions] = useState([]);
 
-  useEffect(() => {
-    loadRepositories();
-  });
+  useEffect(() => loadRepositories(), []);
 
   async function loadRepositories() {
+    console.log('consultando transações');
     const realm = await getRealm();
     const data = realm.objects('transaction').sorted('id', 1);
 
