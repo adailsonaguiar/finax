@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, View, ScrollView, Button } from 'react-native';
+import React, {useState} from 'react';
+import {Text, View, ScrollView, Button} from 'react-native';
 import Header from '../../components/Header';
 import {
   Container,
@@ -9,17 +9,17 @@ import {
   Col,
   Row,
   TotalPago,
-  TotalPendente
+  TotalPendente,
 } from './styles';
 import {
   Transacao,
   RowTransacao,
   ValorTransacao,
   DetalhesTransacao,
-  TitleTransacao
+  TitleTransacao,
 } from './../../components/TransacaoStyles';
 
-const Despesas = ({ navigation }) => {
+const Despesas = ({navigation}) => {
   const [despesas, setDespesas] = useState([
     {
       title: 'Churrascaria Norte Sul',
@@ -27,7 +27,7 @@ const Despesas = ({ navigation }) => {
       date: '23/11/2019',
       category: 'Alimentação',
       status: 'pago',
-      id: 1
+      id: 1,
     },
     {
       title: 'Serra verde - óleo moto',
@@ -35,7 +35,7 @@ const Despesas = ({ navigation }) => {
       date: '24/11/2019',
       category: 'Veículo',
       status: 'pendente',
-      id: 2
+      id: 2,
     },
     {
       title: 'Big Lanches',
@@ -43,8 +43,8 @@ const Despesas = ({ navigation }) => {
       date: '10/11/2019',
       category: 'Alimentação',
       status: 'pago',
-      id: 4
-    }
+      id: 4,
+    },
   ]);
 
   const cadastrarDespesa = () => {
@@ -55,20 +55,20 @@ const Despesas = ({ navigation }) => {
         value: 15.43,
         date: '10/11/2019',
         category: 'Alimentação',
-        status: 'pago'
-      }
+        status: 'pago',
+      },
     ]);
     console.log(despesas);
   };
 
   return (
     <Container>
-      <Header title='Despesas' />
+      <Header title="Despesas" />
       <Button
         onPress={() => {
           navigation.navigate('NovaDespesa');
         }}
-        title='Nova'
+        title="Nova"
       />
       <CardHeader>
         <Row>

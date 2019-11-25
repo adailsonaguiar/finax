@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  createAppContainer,
-  createStackNavigator,
-  createBottomTabNavigator,
-  createSwitchNavigator,
-  createDrawerNavigator
-} from 'react-navigation';
+import {createAppContainer} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createDrawerNavigator} from 'react-navigation-drawer';
 
 import Home from './pages/Home';
 import Despesas from './pages/Despesas';
@@ -20,27 +16,27 @@ const BottomTab = createBottomTabNavigator(
     Home: {
       screen: Home,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name='home' color={tintColor} size={22} />
-        )
-      })
+        tabBarIcon: ({tintColor}) => (
+          <Icon name="home" color={tintColor} size={22} />
+        ),
+      }),
     },
     Despesas: {
       screen: Despesas,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name='money-bill' color={tintColor} size={22} />
-        )
-      }
+        tabBarIcon: ({tintColor}) => (
+          <Icon name="money-bill" color={tintColor} size={22} />
+        ),
+      },
     },
     Carteiras: {
       screen: Carteiras,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name='wallet' color={tintColor} size={22} />
-        )
-      }
-    }
+        tabBarIcon: ({tintColor}) => (
+          <Icon name="wallet" color={tintColor} size={22} />
+        ),
+      },
+    },
   },
   {
     defaultNavigationOptions: {
@@ -48,24 +44,24 @@ const BottomTab = createBottomTabNavigator(
       headerTitle: 'Agosto',
       tabBarOptions: {
         activeTintColor: '#f39c12ff',
-        showLabel: false
-      }
+        showLabel: false,
+      },
     },
-    mode: 'modal'
-  }
+    mode: 'modal',
+  },
 );
 
 export default createAppContainer(
   createDrawerNavigator({
     //  bottomTabNav
     BottomTab: {
-      screen: BottomTab
+      screen: BottomTab,
     },
     NovaDespesa: {
-      screen: NovaDespesa
+      screen: NovaDespesa,
     },
     Header: {
-      screen: Header
-    }
-  })
+      screen: Header,
+    },
+  }),
 );
