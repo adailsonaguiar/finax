@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import Header from '../../components/Header';
 import {Container, CompHead, TitleGrid} from './styles';
+import getRealm from './../../services/realm';
 
 import {
   Transacao,
@@ -12,6 +13,19 @@ import {
 } from './../../components/TransacaoStyles';
 
 const Home = () => {
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    loadRepositories();
+  });
+
+  async function loadRepositories() {
+    const realm = await getRealm();
+    const data = realm.objects('transaction').sorted('id', 1);
+
+    setTransactions(data);
+  }
+
   return (
     <Container>
       <Header title="Agosto" />
@@ -22,133 +36,23 @@ const Home = () => {
       </CompHead>
       <TitleGrid>Histórico</TitleGrid>
       <ScrollView>
-        {/*  <View style={styles.cardGeral}>
-          <View>
-            <Text>VISÃO GERAL</Text>
-          </View>
-          <View style={styles.viewRow}>
-            <View style={styles.stackBar_start}>
-              <Text style={styles.txtIntro}>Receitas</Text>
-            </View>
-            <View style={styles.stackBar_end}>
-              <Text style={{ color: '#3498dbff' }}>R$ 3.616,66</Text>
-            </View>
-          </View>
-          <View style={styles.viewRow}>
-            <View style={styles.stackBar_start}>
-              <Text style={styles.txtIntro}>Despesas</Text>
-            </View>
-            <View style={styles.stackBar_end}>
-              <Text style={{ color: '#f39c12ff' }}>R$ 342,32</Text>
-            </View>
-          </View>
-        </View> */}
-
-        <Transacao>
-          <RowTransacao>
-            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
-            <ValorTransacao>R$ 342,32</ValorTransacao>
-          </RowTransacao>
-          <RowTransacao>
-            <View>
-              <DetalhesTransacao>Alimentação</DetalhesTransacao>
-            </View>
-            <View>
-              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
-            </View>
-            <Text>Pago</Text>
-          </RowTransacao>
-        </Transacao>
-        <Transacao>
-          <RowTransacao>
-            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
-            <ValorTransacao>R$ 342,32</ValorTransacao>
-          </RowTransacao>
-          <RowTransacao>
-            <View>
-              <DetalhesTransacao>Alimentação</DetalhesTransacao>
-            </View>
-            <View>
-              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
-            </View>
-            <Text>Pago</Text>
-          </RowTransacao>
-        </Transacao>
-        <Transacao>
-          <RowTransacao>
-            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
-            <ValorTransacao>R$ 342,32</ValorTransacao>
-          </RowTransacao>
-          <RowTransacao>
-            <View>
-              <DetalhesTransacao>Alimentação</DetalhesTransacao>
-            </View>
-            <View>
-              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
-            </View>
-            <Text>Pago</Text>
-          </RowTransacao>
-        </Transacao>
-        <Transacao>
-          <RowTransacao>
-            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
-            <ValorTransacao>R$ 342,32</ValorTransacao>
-          </RowTransacao>
-          <RowTransacao>
-            <View>
-              <DetalhesTransacao>Alimentação</DetalhesTransacao>
-            </View>
-            <View>
-              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
-            </View>
-            <Text>Pago</Text>
-          </RowTransacao>
-        </Transacao>
-        <Transacao>
-          <RowTransacao>
-            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
-            <ValorTransacao>R$ 342,32</ValorTransacao>
-          </RowTransacao>
-          <RowTransacao>
-            <View>
-              <DetalhesTransacao>Alimentação</DetalhesTransacao>
-            </View>
-            <View>
-              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
-            </View>
-            <Text>Pago</Text>
-          </RowTransacao>
-        </Transacao>
-        <Transacao>
-          <RowTransacao>
-            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
-            <ValorTransacao>R$ 342,32</ValorTransacao>
-          </RowTransacao>
-          <RowTransacao>
-            <View>
-              <DetalhesTransacao>Alimentação</DetalhesTransacao>
-            </View>
-            <View>
-              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
-            </View>
-            <Text>Pago</Text>
-          </RowTransacao>
-        </Transacao>
-        <Transacao>
-          <RowTransacao>
-            <TitleTransacao>Churrascaria flor do nordeste</TitleTransacao>
-            <ValorTransacao>R$ 342,32</ValorTransacao>
-          </RowTransacao>
-          <RowTransacao>
-            <View>
-              <DetalhesTransacao>Alimentação</DetalhesTransacao>
-            </View>
-            <View>
-              <DetalhesTransacao>30/10/2019</DetalhesTransacao>
-            </View>
-            <Text>Pago</Text>
-          </RowTransacao>
-        </Transacao>
+        {transactions.map(despesa => (
+          <Transacao key={despesa.id}>
+            <RowTransacao>
+              <TitleTransacao>{despesa.description}</TitleTransacao>
+              <ValorTransacao>{despesa.value}</ValorTransacao>
+            </RowTransacao>
+            <RowTransacao>
+              <View>
+                <DetalhesTransacao>{despesa.category}</DetalhesTransacao>
+              </View>
+              <View>
+                <DetalhesTransacao>{despesa.date}</DetalhesTransacao>
+              </View>
+              <Text>{despesa.status}</Text>
+            </RowTransacao>
+          </Transacao>
+        ))}
       </ScrollView>
     </Container>
   );

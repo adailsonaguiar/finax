@@ -4,7 +4,6 @@ import {TextInput} from 'react-native-gesture-handler';
 import {TextInputMask} from 'react-native-masked-text';
 import * as themes from './../../styles/themes';
 import ThemeContext from './../../styles/themes/context';
-import ThemeSwitcher from './../../components/ThemeSwitcher/ThemeSwitcher';
 import {ThemeProvider} from 'styled-components';
 import getRealm from './../../services/realm';
 
@@ -17,7 +16,7 @@ import {
 } from './styles';
 
 export default NovaDespesa = ({navigation}) => {
-  const [id, setId] = useState(1);
+  const [type] = useState('expense');
   const [description, setDescription] = useState(0);
   const [value, setValue] = useState(0);
   const [date, setDate] = useState(0);
@@ -29,27 +28,29 @@ export default NovaDespesa = ({navigation}) => {
   async function loadRepositories() {
     const realm = await getRealm();
     const data = realm.objects('Expense').sorted('id', 1);
-
     console.log('get', data);
   }
 
-  async function saveExpense() {
+  async function getId() {
+    const realm = await getRealm();
+    return realm.objects('transaction').max('id') + 1;
+  }
+
+  async function saveTransaction() {
+    const id = await getId();
     const data = {
       id,
+      type,
       description,
       value,
       date,
       category,
       status,
     };
-
     const realm = await getRealm();
-
     realm.write(() => {
-      realm.create('Expense', data);
+      realm.create('transaction', data);
     });
-
-    console.log(data);
     return data;
   }
 
@@ -129,7 +130,7 @@ export default NovaDespesa = ({navigation}) => {
                     style={{paddingLeft: 15, fontWeight: 'bold', fontSize: 17}}
                   />
                 </InputContainer>
-                <TouchableOpacity onPress={saveExpense}>
+                <TouchableOpacity onPress={saveTransaction}>
                   <ButtonContainer>
                     <LabelButton>SALVAR</LabelButton>
                   </ButtonContainer>
