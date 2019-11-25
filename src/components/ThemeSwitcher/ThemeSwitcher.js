@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from 'react-native';
+import {Button} from 'react-native';
 
-const ThemeSwitcher = ({ toggleTheme }) => (
-  <Button onClick={toggleTheme} title='Alterar Tema' />
+const ThemeSwitcher = ({toggleTheme}) => (
+  <Button onClick={toggleTheme} title="Alterar Tema" />
 );
 
 export default ThemeSwitcher;
