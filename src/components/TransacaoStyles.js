@@ -17,12 +17,12 @@ export const RowTransacao = styled.View`
   border-bottom-color: #5c5151;
 `;
 export const TitleTransacao = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   color: #000;
   text-transform: uppercase;
 `;
 export const DetalhesTransacao = styled.Text`
-  font-size: 12px;
+  font-size: 11px;
   color: #8a8a8a;
 `;
 export const ValorTransacao = styled.Text`

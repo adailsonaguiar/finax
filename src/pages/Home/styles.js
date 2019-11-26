@@ -6,15 +6,17 @@ export const Container = styled.View`
 `;
 
 export const CompHead = styled.View`
-  background: #fff;
+  background: #f2f2f2;
   flex-direction: column;
   align-items: center;
   padding: 30px;
 `;
 export const TitleGrid = styled.Text`
   color: #000;
-  font-size: 20px;
+  font-size: 14px;
   margin-left: 10px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
 `;

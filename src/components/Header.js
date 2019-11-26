@@ -22,7 +22,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#f39c12ff',
+    fontSize: 20,
   },
   stackBar_start: {
     flexDirection: 'row',

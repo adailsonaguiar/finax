@@ -20,6 +20,7 @@
     "react-navigation": "^4.0.10",
     "react-navigation-drawer": "^2.3.3",
     "react-navigation-tabs": "^2.6.0",
+    "react-number-format": "^4.3.1",
     "realm": "^3.4.2",
     "styled-components": "^4.4.1"
   },
