@@ -6,6 +6,7 @@ import * as themes from './../../styles/themes';
 import ThemeContext from './../../styles/themes/context';
 import {ThemeProvider} from 'styled-components';
 import getRealm from './../../services/realm';
+import DatePicker from 'react-native-datepicker';
 
 import {
   Container,
@@ -23,7 +24,7 @@ export default NovaDespesa = ({navigation}) => {
   const [category, setCategory] = useState(0);
   const [status, setStatus] = useState(1);
 
-  const [theme, setTheme] = useState({theme: themes.dark});
+  const [theme, setTheme] = useState({theme: themes.light});
 
   async function loadRepositories() {
     const realm = await getRealm();
@@ -38,7 +39,7 @@ export default NovaDespesa = ({navigation}) => {
 
   async function saveTransaction() {
     const id = await getId();
-   /*  const valueNegative = Number(value) * Number(-1);
+    /*  const valueNegative = Number(value) * Number(-1);
     console.log(valueNegative); */
     const data = {
       id,
@@ -69,15 +70,10 @@ export default NovaDespesa = ({navigation}) => {
     <Container>
       <ThemeContext.Provider value={theme}>
         <Button title="teste" onPress={toggleTheme} />
-        <Button title="getBd" onPress={loadRepositories} />
         <ThemeContext.Consumer>
           {theme => (
             <ThemeProvider theme={theme}>
               <Form>
-                <ButtonContainer>
-                  <LabelButton>SALVAR</LabelButton>
-                </ButtonContainer>
-
                 <TextInput />
                 <InputContainer>
                   <TextInput
@@ -95,16 +91,35 @@ export default NovaDespesa = ({navigation}) => {
                   />
                 </InputContainer>
                 <InputContainer>
-                  <TextInput
-                    style={{
-                      height: 45,
-                      fontSize: 17,
-                      paddingLeft: 15,
-                      paddingRight: 15,
+                  <DatePicker
+                    date={date}
+                    mode="date"
+                    placeholder="Selecione uma data"
+                    format="DD-MM-YYYY"
+                    minDate="01-01-2019"
+                    maxDate="31-12-2025"
+                    confirmBtnText="Ok"
+                    cancelBtnText="Cancelar"
+                    style={{width: '100%'}}
+                    customStyles={{
+                      dateIcon: {
+                        position: 'absolute',
+                        left: 4,
+                        top: 4,
+                        marginLeft: 4,
+                      },
+                      dateInput: {
+                        borderWidth: 0,
+                      },
+                      dateText: {
+                        fontSize: 17,
+                        textAlign: 'left',
+                      },
+                      placeholderText: {
+                        fontSize: 17,
+                      },
                     }}
-                    placeholder="Data"
-                    value={date}
-                    onChangeText={date => {
+                    onDateChange={date => {
                       setDate(date);
                     }}
                   />
@@ -125,6 +140,13 @@ export default NovaDespesa = ({navigation}) => {
                 <InputContainer>
                   <TextInputMask
                     type={'money'}
+                    options={{
+                      precision: 2,
+                      separator: ',',
+                      delimiter: '.',
+                      unit: 'R$',
+                      suffixUnit: '',
+                    }}
                     value={value}
                     onChangeText={value => {
                       setValue(value);

@@ -12,8 +12,8 @@ export const Form = styled.View`
 export const InputContainer = styled.View`
   justify-content: center;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 24px;
+  border-bottom-width: 1px;
+  border-bottom-color: #ddd;
   height: 45px;
   margin-left: 30px;
   margin-right: 30px;
