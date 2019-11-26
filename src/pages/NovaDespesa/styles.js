@@ -12,26 +12,23 @@ export const Form = styled.View`
 export const InputContainer = styled.View`
   justify-content: center;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 24px;
+  border-bottom-width: 1px;
+  border-bottom-color: #f2f2f2;
   height: 45px;
   margin-left: 30px;
   margin-right: 30px;
 `;
 export const ButtonContainer = styled.View`
   justify-content: center;
-  margin-bottom: 20px;
-  background: #f39c12ff;
-  border: 1px solid #f39c12ff;
-  border-radius: 24px;
-  height: 45px;
-  margin-left: 50px;
-  margin-right: 50px;
+  height: 100%;
   justify-content: center;
   align-items: center;
+  border-top-width: 1px;
+  border-top-color: #f2f2f2;
+  background: #fff;
 `;
 export const LabelButton = styled.Text`
-  color: ${props => props.theme.theme.color};
+  color: #f39c12ff;
   font-size: 14px;
   font-weight: bold;
 `;

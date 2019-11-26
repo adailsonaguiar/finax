@@ -15,11 +15,10 @@ import {
 const Home = () => {
   const [transactions, setTransactions] = useState([]);
 
-  useEffect(() => {
-    loadRepositories();
-  });
+  useEffect(() => loadRepositories(), []);
 
   async function loadRepositories() {
+    console.log('consultando transações');
     const realm = await getRealm();
     const data = realm.objects('transaction').sorted('id', 1);
 
@@ -28,13 +27,13 @@ const Home = () => {
 
   return (
     <Container>
-      <Header title="Agosto" />
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <Header  />
+      <StatusBar barStyle="dark-content" backgroundColor="#f2f2f2" />
       <CompHead>
         <Text style={styles.txtSaldo}>R$ 9.857,96</Text>
         <Text style={styles.txtDescricao}>Saldo Receitas</Text>
       </CompHead>
-      <TitleGrid>Histórico</TitleGrid>
+      <TitleGrid>HISTÓRICO</TitleGrid>
       <ScrollView>
         {transactions.map(despesa => (
           <Transacao key={despesa.id}>
