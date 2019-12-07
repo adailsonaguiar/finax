@@ -13,5 +13,5 @@ export const Container = styled.View`
 export const Title = styled.Text`
   color: #03dac5;
   font-size: 17px;
-  font-weight: bold;
+  font-family: Roboto-Bold;
 `;

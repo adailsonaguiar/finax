@@ -13,13 +13,13 @@ export const HerderList = styled.View`
 `;
 export const TitleComponent = styled.Text`
   color: #e1e1e1;
-  font-weight: bold;
   font-size: 30px;
+  font-family: Roboto-Bold;
 `;
 export const Date = styled.Text`
   color: #95a5a6;
-  font-weight: bold;
   font-size: 12px;
+  font-family: Roboto-Medium;
 `;
 export const Lista = styled.View`
   flex: 5;
@@ -46,10 +46,11 @@ export const ColLeft = styled.View`
 export const TitleConta = styled.Text`
   color: #e1e1e1;
   font-size: 19px;
-  font-weight: bold;
+  font-family: Roboto-Bold;
 `;
 export const CategoryConta = styled.Text`
   color: #444359;
+  font-family: Roboto-Medium;
 `;
 export const ColRight = styled.View`
   flex-direction: column;
@@ -59,10 +60,11 @@ export const ColRight = styled.View`
 export const Saldo = styled.Text`
   color: #e1e1e1;
   font-size: 19px;
-  font-weight: bold;
+  font-family: Roboto-Bold;
 `;
 export const Atualizado = styled.Text`
   color: #444359;
+  font-family: Roboto-Medium;
 `;
 export const Footer = styled.View`
   background: #191919;
@@ -74,6 +76,7 @@ export const Footer = styled.View`
 export const SaldoTotal = styled.Text`
   color: #e1e1e1;
   flex: 3;
+  font-family: Roboto-Medium;
 `;
 export const BtnNovaConta = styled.TouchableOpacity`
   background: #282828;
@@ -87,4 +90,5 @@ export const BtnNovaConta = styled.TouchableOpacity`
 `;
 export const TxtNovaConta = styled.Text`
   color: #e1e1e1;
+  font-family: Roboto-Bold;
 `;
