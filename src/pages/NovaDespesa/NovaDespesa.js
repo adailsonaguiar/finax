@@ -143,12 +143,20 @@ export default NovaDespesa = ({navigation}) => {
                     </Picker>
                   </InputContainer>
                   <InputContainer>
-                    {/*  <NumberFormat
-                    value={2456981}
-                    displayType={'text'}
-                    thousandSeparator={true}
-                    prefix={'$'}
-                  /> */}
+                    <TextInputMask
+                      type={'money'}
+                      options={{
+                        precision: 2,
+                        separator: ',',
+                        delimiter: '.',
+                        unit: 'R$',
+                        suffixUnit: '',
+                      }}
+                      value={value}
+                      onChangeText={value => {
+                        setValue(value);
+                      }}
+                    />
                   </InputContainer>
                 </Form>
               </View>
