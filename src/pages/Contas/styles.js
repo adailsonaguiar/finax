@@ -24,7 +24,7 @@ export const Date = styled.Text`
 export const Lista = styled.View`
   flex: 5;
 `;
-export const Conta = styled.View`
+export const Conta = styled.TouchableOpacity`
   flex-direction: row;
   border-top-width: 1px;
   border-top-color: #1d1d1d;
@@ -63,4 +63,28 @@ export const Saldo = styled.Text`
 `;
 export const Atualizado = styled.Text`
   color: #444359;
+`;
+export const Footer = styled.View`
+  background: #191919;
+  height: 61px;
+  align-items: center;
+  padding-left: 20px;
+  flex-direction: row;
+`;
+export const SaldoTotal = styled.Text`
+  color: #e1e1e1;
+  flex: 3;
+`;
+export const BtnNovaConta = styled.TouchableOpacity`
+  background: #282828;
+  border-radius: 10px;
+  flex: 2;
+  height: 47px;
+  width: 110px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+`;
+export const TxtNovaConta = styled.Text`
+  color: #e1e1e1;
 `;

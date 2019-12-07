@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, StatusBar, Image, FlatList} from 'react-native';
+import {StatusBar, FlatList, TouchableOpacity} from 'react-native';
 import Header from '../../components/Header/Header';
 import {
   Container,
@@ -15,6 +15,10 @@ import {
   Saldo,
   Atualizado,
   Lista,
+  Footer,
+  SaldoTotal,
+  BtnNovaConta,
+  TxtNovaConta,
 } from './styles';
 
 const bbicon = require('../../assets/contas/bbicon.png');
@@ -75,6 +79,12 @@ const Carteiras = ({navigation}) => {
           )}
         />
       </Lista>
+      <Footer>
+        <SaldoTotal>Saldo das contas: R$ 16.241,71</SaldoTotal>
+        <BtnNovaConta>
+          <TxtNovaConta>Adicionar Conta</TxtNovaConta>
+        </BtnNovaConta>
+      </Footer>
       {/*       <Button onPress={() => navigation.navigate('NovaDespesa')} title="Nova" />
        */}
     </Container>
