@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import {Container, CompHead, TitleGrid} from './styles';
 import getRealm from '../../services/realm';
 

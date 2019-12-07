@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text, View, ScrollView, Button} from 'react-native';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import {
   Container,
   TitleGrid,

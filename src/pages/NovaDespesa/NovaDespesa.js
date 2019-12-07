@@ -8,7 +8,7 @@ import {ThemeProvider} from 'styled-components';
 import getRealm from './../../services/realm';
 import DatePicker from 'react-native-datepicker';
 import NumberFormat from 'react-number-format';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 
 import {
   Container,
