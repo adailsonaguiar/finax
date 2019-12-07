@@ -5,6 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Dash from './pages/Dash/Dash';
 import Despesas from './pages/Despesas';
 import Contas from './pages/Contas/Contas';
+import ContaForm from './pages/ContaForm/ContaForm';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NovaDespesa from './pages/NovaDespesa/NovaDespesa';
@@ -67,13 +68,11 @@ import NovaDespesa from './pages/NovaDespesa/NovaDespesa';
 export default createAppContainer(
   createStackNavigator(
     {
+      ContaForm: {
+        screen: ContaForm,
+      },
       Contas: {
         screen: Contas,
-        navigationOptions: {
-          tabBarIcon: ({tintColor}) => (
-            <Icon name="wallet" color={tintColor} size={22} />
-          ),
-        },
       },
     },
     {

@@ -81,7 +81,7 @@ const Carteiras = ({navigation}) => {
       </Lista>
       <Footer>
         <SaldoTotal>Saldo das contas: R$ 16.241,71</SaldoTotal>
-        <BtnNovaConta>
+        <BtnNovaConta onPress={() => navigation.navigate('ContaForm')}>
           <TxtNovaConta>Adicionar Conta</TxtNovaConta>
         </BtnNovaConta>
       </Footer>
