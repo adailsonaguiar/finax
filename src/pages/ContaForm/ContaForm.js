@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 
+import getRealm from './../../services/realm';
+
 import {
   Container,
   TxtHeaderForm,
@@ -51,9 +53,9 @@ export default function ContaForm({navigation}) {
     },
     '341': {label: 'Itaú - 341', description: 'Conta Corrente', code: '341'},
   });
-  const [description, setDescription] = useState(0);
-  const [value, setValue] = useState(0);
-  const [conta, setConta] = useState(0);
+  const [description, setDescription] = useState('');
+  const [balance, setBalance] = useState('');
+  const [account, setConta] = useState('');
   const [icon, setIcon] = useState('');
 
   const setIconAccount = code => {
@@ -65,6 +67,68 @@ export default function ContaForm({navigation}) {
     setDescription(contas[code].description);
     setIconAccount(code);
   };
+
+  async function getId() {
+    const realm = await getRealm();
+    return realm.objects('contas').max('id') + 1;
+  }
+
+  function getDate() {
+    const date = new Date();
+    const day =
+      date.getDay() < 10 ? `0${date.getDay() + 1}` : `${date.getDay() + 1}`;
+    const month =
+      date.getMonth() < 10
+        ? `0${date.getMonth() + 1}`
+        : `${date.getMonth() + 1}`;
+    return `${day}/${month}/${date.getFullYear()}`;
+  }
+
+  function formatBalance(balance) {
+    const patternParse = balance
+      .replace('.', '')
+      .replace(',', '.')
+      .substr(2);
+    return `${Number.parseFloat(patternParse * 100)}`;
+  }
+
+  async function setObject() {
+    let id = await getId();
+    if (isNaN(id)) {
+      id = 1;
+    }
+    /*  if (description.length === 0) {
+      return alert('Digite uma descrição!');
+    }
+    if (balance.length === 0) {
+      return alert('Digite o saldo da conta!');
+    }
+    if (account.length === 0) {
+      return alert('Selecione uma conta!');
+    } */
+    return {
+      id,
+      atualizacao: getDate(),
+      description,
+      balance: formatBalance(balance),
+      account,
+    };
+  }
+
+  async function saveAccount() {
+    const account = await setObject();
+    const realm = await getRealm();
+
+    try {
+      realm.write(() => {
+        realm.create('contas', account);
+      });
+    } catch (e) {
+      return e;
+    }
+    alert('Conta salva com sucesso!');
+    return account;
+  }
 
   return (
     <Container>
@@ -81,7 +145,7 @@ export default function ContaForm({navigation}) {
       <Form>
         <InputContainer>
           <Picker
-            selectedValue={conta}
+            selectedValue={account}
             onValueChange={selected => {
               setPropertyAccount(selected);
             }}
@@ -112,17 +176,15 @@ export default function ContaForm({navigation}) {
               unit: 'R$',
               suffixUnit: '',
             }}
-            value={value}
-            onChangeText={value => {
-              setValue(value);
+            value={balance}
+            onChangeText={balance => {
+              setBalance(balance);
             }}
             style={styles.input}
           />
         </InputContainer>
       </Form>
-      <BtnNovaConta
-        activeOpacity={0.9}
-        onPress={() => navigation.navigate('ContaForm')}>
+      <BtnNovaConta activeOpacity={0.9} onPress={() => saveAccount()}>
         <TxtNovaConta>SALVAR</TxtNovaConta>
       </BtnNovaConta>
     </Container>
