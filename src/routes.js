@@ -68,11 +68,11 @@ import NovaDespesa from './pages/NovaDespesa/NovaDespesa';
 export default createAppContainer(
   createStackNavigator(
     {
-      ContaForm: {
-        screen: ContaForm,
-      },
       Contas: {
         screen: Contas,
+      },
+      ContaForm: {
+        screen: ContaForm,
       },
     },
     {
