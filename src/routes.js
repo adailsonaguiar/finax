@@ -1,20 +1,19 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import {createStackNavigator} from 'react-navigation-stack';
 
-import Home from './pages/Home';
+import Dash from './pages/Dash/Dash';
 import Despesas from './pages/Despesas';
-import Carteiras from './pages/Carteiras';
-import Header from './components/Header';
+import Contas from './pages/Contas/Contas';
+import ContaForm from './pages/ContaForm/ContaForm';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import NovaDespesa from './pages/NovaDespesa/NovaDespesa';
 
-const BottomTab = createBottomTabNavigator(
+/* const BottomTab = createBottomTabNavigator(
   {
-    Home: {
-      screen: Home,
+    Dash: {
+      screen: Dash,
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}) => (
           <Icon name="home" color={tintColor} size={22} />
@@ -29,8 +28,8 @@ const BottomTab = createBottomTabNavigator(
         ),
       },
     },
-    Carteiras: {
-      screen: Carteiras,
+    Contas: {
+      screen: Contas,
       navigationOptions: {
         tabBarIcon: ({tintColor}) => (
           <Icon name="wallet" color={tintColor} size={22} />
@@ -50,8 +49,8 @@ const BottomTab = createBottomTabNavigator(
     mode: 'modal',
   },
 );
-
-export default createAppContainer(
+ */
+/* export default createAppContainer(
   createDrawerNavigator({
     //  bottomTabNav
     BottomTab: {
@@ -64,4 +63,23 @@ export default createAppContainer(
       screen: Header,
     },
   }),
+); */
+
+export default createAppContainer(
+  createStackNavigator(
+    {
+      Contas: {
+        screen: Contas,
+      },
+      ContaForm: {
+        screen: ContaForm,
+      },
+    },
+    {
+      headerMode: 'none',
+      navigationOptions: {
+        headerVisible: false,
+      },
+    },
+  ),
 );

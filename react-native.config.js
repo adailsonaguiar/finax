@@ -1,9 +1,7 @@
 module.exports = {
-  /*  dependencies: {
-    realm: {
-      platforms: {
-        android: null, // disable Android platform, other platforms will still autolink
-      },
-    },
-  }, */
+  project: {
+    ios: {},
+    android: {}, // grouped into "project"
+  },
+  assets: ['./assets/fonts/'], // stays the same
 };

@@ -8,7 +8,7 @@ import {ThemeProvider} from 'styled-components';
 import getRealm from './../../services/realm';
 import DatePicker from 'react-native-datepicker';
 import NumberFormat from 'react-number-format';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 
 import {
   Container,
@@ -143,12 +143,20 @@ export default NovaDespesa = ({navigation}) => {
                     </Picker>
                   </InputContainer>
                   <InputContainer>
-                    {/*  <NumberFormat
-                    value={2456981}
-                    displayType={'text'}
-                    thousandSeparator={true}
-                    prefix={'$'}
-                  /> */}
+                    <TextInputMask
+                      type={'money'}
+                      options={{
+                        precision: 2,
+                        separator: ',',
+                        delimiter: '.',
+                        unit: 'R$',
+                        suffixUnit: '',
+                      }}
+                      value={value}
+                      onChangeText={value => {
+                        setValue(value);
+                      }}
+                    />
                   </InputContainer>
                 </Form>
               </View>

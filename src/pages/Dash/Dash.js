@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import {Container, CompHead, TitleGrid} from './styles';
-import getRealm from './../../services/realm';
+import getRealm from '../../services/realm';
 
 import {
   Transacao,
@@ -10,9 +10,9 @@ import {
   ValorTransacao,
   DetalhesTransacao,
   TitleTransacao,
-} from './../../components/TransacaoStyles';
+} from '../../components/TransacaoStyles';
 
-const Home = () => {
+export default  Dash = () => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => loadRepositories(), []);
@@ -56,8 +56,6 @@ const Home = () => {
     </Container>
   );
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
   stackBar: {
