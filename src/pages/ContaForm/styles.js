@@ -28,8 +28,8 @@ export const TxtBtnFechar = styled.Text`
   font-family: Roboto-Light;
 `;
 export const Form = styled.View`
-  justify-content: center;
-  flex: 10;
+  justify-content: flex-start;
+  flex: 7;
 `;
 export const InputContainer = styled.View`
   justify-content: center;
@@ -81,6 +81,16 @@ export const TxtNovaConta = styled.Text`
   color: #e1e1e1;
   font-family: Roboto-Bold;
   font-size: 18px;
+`;
+export const ImgConta = styled.Image`
+  width: 80px;
+  height: 80px;
+`;
+export const ContainerIcon = styled.View`
+  flex: 3;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 10px;
 `;
 
 export const styles = StyleSheet.create({
