@@ -58,6 +58,10 @@ export default function ContaForm({navigation}) {
   const [account, setConta] = useState('');
   const [icon, setIcon] = useState('');
 
+/*   const formatNumber = () => {
+
+  }; */
+
   const setIconAccount = code => {
     setIcon(contas[code].icon);
   };

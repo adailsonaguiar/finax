@@ -34,8 +34,8 @@ export const Conta = styled.TouchableOpacity`
   padding-right: 20px;
 `;
 export const Icon = styled.Image`
-  width: 55px;
-  height: 55px;
+  width: 30px;
+  height: 30px;
 `;
 export const ColLeft = styled.View`
   flex-direction: column;
@@ -49,8 +49,9 @@ export const TitleConta = styled.Text`
   font-family: Roboto-Bold;
 `;
 export const CategoryConta = styled.Text`
-  color: #444359;
-  font-family: Roboto-Medium;
+  color: #90909c;
+  font-family: Roboto-Regular;
+  font-size: 11px;
 `;
 export const ColRight = styled.View`
   flex-direction: column;
@@ -63,8 +64,9 @@ export const Saldo = styled.Text`
   font-family: Roboto-Bold;
 `;
 export const Atualizado = styled.Text`
-  color: #444359;
-  font-family: Roboto-Medium;
+  color: #90909c;
+  font-family: Roboto-Regular;
+  font-size: 11px;
 `;
 export const Footer = styled.View`
   background: #191919;
@@ -77,6 +79,7 @@ export const SaldoTotal = styled.Text`
   color: #e1e1e1;
   flex: 3;
   font-family: Roboto-Medium;
+  font-size: 11px;
 `;
 export const BtnNovaConta = styled.TouchableOpacity`
   background: #282828;
@@ -91,4 +94,5 @@ export const BtnNovaConta = styled.TouchableOpacity`
 export const TxtNovaConta = styled.Text`
   color: #e1e1e1;
   font-family: Roboto-Bold;
+  font-size: 11px;
 `;
