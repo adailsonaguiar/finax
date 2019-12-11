@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, ActivityIndicator} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 
 import getRealm from './../../services/realm';
@@ -57,10 +57,7 @@ export default function ContaForm({navigation}) {
   const [balance, setBalance] = useState('');
   const [account, setConta] = useState('');
   const [icon, setIcon] = useState('');
-
-/*   const formatNumber = () => {
-
-  }; */
+  const [loading, setLoading] = useState(false);
 
   const setIconAccount = code => {
     setIcon(contas[code].icon);
@@ -120,17 +117,20 @@ export default function ContaForm({navigation}) {
   }
 
   async function saveAccount() {
+    setLoading(true);
     const account = await setObject();
     const realm = await getRealm();
 
     try {
       realm.write(() => {
         realm.create('contas', account);
+        setLoading(false);
+        navigation.goBack();
       });
     } catch (e) {
       return e;
     }
-    alert('Conta salva com sucesso!');
+
     return account;
   }
 
@@ -188,8 +188,15 @@ export default function ContaForm({navigation}) {
           />
         </InputContainer>
       </Form>
-      <BtnNovaConta activeOpacity={0.9} onPress={() => saveAccount()}>
-        <TxtNovaConta>SALVAR</TxtNovaConta>
+      <BtnNovaConta
+        disabled={loading}
+        activeOpacity={0.9}
+        onPress={() => saveAccount()}>
+        {loading ? (
+          <ActivityIndicator size="large" color="#fff" />
+        ) : (
+          <TxtNovaConta>SALVAR</TxtNovaConta>
+        )}
       </BtnNovaConta>
     </Container>
   );
