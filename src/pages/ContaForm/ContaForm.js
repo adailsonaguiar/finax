@@ -69,12 +69,12 @@ export default function ContaForm({navigation}) {
     setIconAccount(code);
   };
 
-  async function getId() {
+  const getId = async () => {
     const realm = await getRealm();
     return realm.objects('contas').max('id') + 1;
-  }
+  };
 
-  function getDate() {
+  const getDate = () => {
     const date = new Date();
     const day =
       date.getDay() < 10 ? `0${date.getDay() + 1}` : `${date.getDay() + 1}`;
@@ -83,17 +83,17 @@ export default function ContaForm({navigation}) {
         ? `0${date.getMonth() + 1}`
         : `${date.getMonth() + 1}`;
     return `${day}/${month}/${date.getFullYear()}`;
-  }
+  };
 
-  function formatBalance(balance) {
+  const formatBalance = balance => {
     const patternParse = balance
       .replace('.', '')
       .replace(',', '.')
       .substr(2);
     return `${Number.parseFloat(patternParse * 100)}`;
-  }
+  };
 
-  async function setObject() {
+  const setObject = async () => {
     let id = await getId();
     if (isNaN(id)) {
       id = 1;
@@ -114,9 +114,16 @@ export default function ContaForm({navigation}) {
       balance: formatBalance(balance),
       account,
     };
-  }
+  };
 
-  async function saveAccount() {
+  const resetForm = () => {
+    setDescription('');
+    setBalance('');
+    setConta('');
+    setIcon('');
+  };
+
+  const saveAccount = async () => {
     setLoading(true);
     const account = await setObject();
     const realm = await getRealm();
@@ -125,6 +132,7 @@ export default function ContaForm({navigation}) {
       realm.write(() => {
         realm.create('contas', account);
         setLoading(false);
+        resetForm();
         navigation.goBack();
       });
     } catch (e) {
@@ -132,7 +140,7 @@ export default function ContaForm({navigation}) {
     }
 
     return account;
-  }
+  };
 
   return (
     <Container>
