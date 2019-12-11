@@ -1,13 +1,14 @@
 import styled from 'styled-components/native';
 import {StyleSheet} from 'react-native';
+import colors from '../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
-  background: #1e1e1e;
+  background: ${colors.backgroundForm};
 `;
 export const HeaderForm = styled.View`
   flex: 1;
-  background: #1e1e1e;
+  background: ${colors.backgroundForm};
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
@@ -17,7 +18,7 @@ export const HeaderForm = styled.View`
   margin-top: 30px;
 `;
 export const TxtHeaderForm = styled.Text`
-  color: #e1e1e1;
+  color: ${colors.fontLight};
   font-size: 30px;
   font-family: Roboto-Bold;
 `;
@@ -27,7 +28,7 @@ export const BtnFechar = styled.TouchableOpacity`
   align-items: flex-end;
 `;
 export const TxtBtnFechar = styled.Text`
-  color: #e1e1e1;
+  color: ${colors.fontLight};
   font-size: 25px;
 `;
 export const Form = styled.View`
@@ -81,7 +82,7 @@ export const BtnNovaConta = styled.TouchableOpacity`
   justify-content: center;
 `;
 export const TxtNovaConta = styled.Text`
-  color: #e1e1e1;
+  color: ${colors.fontLight};
   font-family: Roboto-Bold;
   font-size: 18px;
 `;
