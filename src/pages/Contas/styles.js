@@ -45,7 +45,7 @@ export const ColLeft = styled.View`
 `;
 export const TitleConta = styled.Text`
   color: #e1e1e1;
-  font-size: 19px;
+  font-size: 16px;
   font-family: Roboto-Bold;
 `;
 export const CategoryConta = styled.Text`
@@ -60,7 +60,7 @@ export const ColRight = styled.View`
 `;
 export const Saldo = styled.Text`
   color: #e1e1e1;
-  font-size: 19px;
+  font-size: 16px;
   font-family: Roboto-Bold;
 `;
 export const Atualizado = styled.Text`

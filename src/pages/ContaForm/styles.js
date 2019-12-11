@@ -21,11 +21,14 @@ export const TxtHeaderForm = styled.Text`
   font-size: 30px;
   font-family: Roboto-Bold;
 `;
-export const BtnFechar = styled.TouchableOpacity``;
+export const BtnFechar = styled.TouchableOpacity`
+  width: 35px;
+  height: 35px;
+  align-items: flex-end;
+`;
 export const TxtBtnFechar = styled.Text`
   color: #e1e1e1;
   font-size: 25px;
-  font-family: Roboto-Light;
 `;
 export const Form = styled.View`
   justify-content: flex-start;
