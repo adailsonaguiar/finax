@@ -64,7 +64,6 @@ export default function ContaForm({navigation}) {
   };
 
   const setPropertyAccount = code => {
-    console.log(account);
     setAccount(code);
     setDescription(contas[code].description);
     setIconAccount(code);
@@ -157,7 +156,7 @@ export default function ContaForm({navigation}) {
         </BtnFechar>
       </HeaderForm>
       <ContainerIcon>
-        <ImgConta source={icon} />
+        <ImgConta src={icon} />
       </ContainerIcon>
       <Form>
         <InputContainer>
