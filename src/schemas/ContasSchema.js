@@ -6,7 +6,7 @@ export default class ContasSchema {
       id: {type: 'int', indexed: true},
       atualizacao: 'string',
       description: 'string',
-      balance: 'string',
+      balance: 'float',
       account: 'string',
     },
   };

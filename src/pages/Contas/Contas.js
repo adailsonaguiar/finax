@@ -34,8 +34,8 @@ const Carteiras = ({navigation}) => {
     async function loadAccounts() {
       const realm = await getRealm();
       const data = realm.objects('contas').sorted('id', 1);
+      console.log('passou');
       setAccounts(data);
-      return data;
     }
     loadAccounts();
   }, []);

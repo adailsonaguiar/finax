@@ -96,6 +96,12 @@ export const ContainerIcon = styled.View`
   align-items: center;
   padding-bottom: 10px;
 `;
+export const ContainerFormFooter = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  flex: 1;
+`;
 export const BtnRemove = styled.TouchableOpacity`
   background: transparent;
   border-width: 1px;
@@ -112,12 +118,7 @@ export const LabelBtnRemove = styled.Text`
   font-size: 11px;
   color: #95a5a6;
 `;
-export const ContainerFormFooter = styled.View`
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 100px;
-`;
+
 export const styles = StyleSheet.create({
   input: {color: 'white', fontSize: 17},
 });

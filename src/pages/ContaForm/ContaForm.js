@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {StatusBar, ActivityIndicator, Alert} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import messageResponse from './../../utils/messageResponse';
+import colors from '../../styles/colors';
 
 import getRealm from './../../services/realm';
 
@@ -25,6 +26,9 @@ import {
   ContainerFormFooter,
 } from './styles';
 
+import bb_icon from './../../assets/contas/bbicon.png';
+import nu_icon from './../../assets/contas/nuicon.png';
+
 export default function ContaForm({navigation}) {
   const {state} = navigation;
   const [contas] = useState({
@@ -33,7 +37,7 @@ export default function ContaForm({navigation}) {
       label: 'Banco do Brasil - 001',
       description: 'Conta Corrente',
       code: '001',
-      icon: require('./../../assets/contas/bbicon.png'),
+      icon: bb_icon,
     },
     '104': {
       label: 'Caixa Econômica - 104',
@@ -44,7 +48,7 @@ export default function ContaForm({navigation}) {
       label: 'Nuconta - 260',
       description: 'Conta Poupança / Investimento',
       code: '260',
-      icon: require('./../../assets/contas/nuicon.png'),
+      icon: nu_icon,
     },
     '204': {
       label: 'Bradesco - 204',
@@ -59,25 +63,32 @@ export default function ContaForm({navigation}) {
     '341': {label: 'Itaú - 341', description: 'Conta Corrente', code: '341'},
   });
   const [description, setDescription] = useState('');
-  const [balance, setBalance] = useState('');
+  const [balance, setBalance] = useState(0);
   const [account, setAccount] = useState('');
-  const [icon, setIcon] = useState('');
+  const [icon, setIcon] = useState(bb_icon);
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(0);
   const [isEdition, setEdit] = useState(false);
 
   useEffect(() => {
-    const getAccountEdit = () => {
+    const detectionAccountParams = () => {
       if (state.params) {
-        setId(state.params.conta.id);
-        setDescription(state.params.conta.description);
-        setBalance(state.params.conta.balance);
-        setAccount(state.params.conta.account);
         setEdit(true);
-        console.log('teste');
+        return true;
       }
+      return false;
     };
-    getAccountEdit();
+    const getAccountEdit = () => {
+      setAccount(state.params.conta.account);
+      setId(state.params.conta.id);
+      setDescription(state.params.conta.description);
+      setBalance(state.params.conta.balance / 100);
+    };
+    if (detectionAccountParams()) {
+      setTimeout(() => {
+        getAccountEdit();
+      }, 500);
+    }
   }, []);
 
   const setIconAccount = code => {
@@ -91,8 +102,16 @@ export default function ContaForm({navigation}) {
   };
 
   const getId = async schema => {
-    const realm = await getRealm();
-    return realm.objects(schema).max('id') + 1;
+    try {
+      const realm = await getRealm();
+      const maxId = realm.objects(schema).max('id') + 1;
+      if (isNaN(maxId)) {
+        return 0;
+      }
+      return maxId;
+    } catch (e) {
+      messageResponse.error(e);
+    }
   };
 
   const getDate = () => {
@@ -107,12 +126,15 @@ export default function ContaForm({navigation}) {
   };
 
   const formatBalance = balance => {
-    const removedChar = balance
-      .substr(2)
-      .replace('.', '')
-      .replace(',', '.');
-    const patternParse = parseFloat(removedChar) * 100;
-    return `${patternParse}`;
+    if (typeof balance == 'string') {
+      const removedChar = balance
+        .substr(2)
+        .replace('.', '')
+        .replace(',', '.');
+      const patternParse = parseFloat(removedChar) * 100;
+      return patternParse;
+    }
+    return balance * 100;
   };
 
   const resetForm = () => {
@@ -151,11 +173,14 @@ export default function ContaForm({navigation}) {
     }
     return true;
   };
-
   const setObject = async () => {
     const idMaxAccount = await getId('contas');
-    let idAccount = id;
-    if (!isEdition) {
+    let idAccount = 0;
+    let valueBalance = 0;
+    valueBalance = formatBalance(balance);
+    if (isEdition) {
+      idAccount = id;
+    } else {
       idAccount = idMaxAccount;
     }
     if (validateForm()) {
@@ -163,7 +188,7 @@ export default function ContaForm({navigation}) {
         id: idAccount,
         atualizacao: getDate(),
         description,
-        balance: formatBalance(balance),
+        balance: valueBalance,
         account,
       };
       saveAccount(data);
@@ -208,10 +233,18 @@ export default function ContaForm({navigation}) {
 
   return (
     <Container>
-      <StatusBar barStyle="light-content" backgroundColor="#1e1e1e" />
+      <StatusBar barStyle="light-content" backgroundColor={colors.dark} />
       <HeaderForm>
-        <TxtHeaderForm>NOVA CONTA</TxtHeaderForm>
-        <BtnFechar onPress={() => navigation.goBack()}>
+        <TxtHeaderForm>
+          {isEdition ? 'ATUALIZAR CONTA' : 'NOVA CONTA'}
+        </TxtHeaderForm>
+        <BtnFechar
+          onPress={() => {
+            // navigation.goBack()
+            navigation.navigate('Contas', {
+              refresh: true,
+            });
+          }}>
           <TxtBtnFechar>X</TxtBtnFechar>
         </BtnFechar>
       </HeaderForm>
