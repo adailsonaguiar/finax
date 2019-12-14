@@ -81,7 +81,7 @@ export const BtnNovaConta = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
 `;
-export const TxtNovaConta = styled.Text`
+export const LabelBtn = styled.Text`
   color: ${colors.fontLight};
   font-family: Roboto-Bold;
   font-size: 18px;
@@ -96,7 +96,28 @@ export const ContainerIcon = styled.View`
   align-items: center;
   padding-bottom: 10px;
 `;
-
+export const BtnRemove = styled.TouchableOpacity`
+  background: transparent;
+  border-width: 1px;
+  border-color: #383642;
+  height: 35px;
+  width: 230px;
+  border-radius: 24px;
+  align-items: center;
+  justify-content: center;
+`;
+export const LabelBtnRemove = styled.Text`
+  color: ${colors.fontLight};
+  font-family: Roboto-Medium;
+  font-size: 11px;
+  color: #95a5a6;
+`;
+export const ContainerFormFooter = styled.View`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+`;
 export const styles = StyleSheet.create({
   input: {color: 'white', fontSize: 17},
 });

@@ -14,11 +14,14 @@ import {
   InputContainer,
   Input,
   BtnNovaConta,
-  TxtNovaConta,
+  LabelBtn,
   styles,
   Picker,
   ImgConta,
   ContainerIcon,
+  BtnRemove,
+  LabelBtnRemove,
+  ContainerFormFooter,
 } from './styles';
 
 export default function ContaForm({navigation}) {
@@ -60,6 +63,7 @@ export default function ContaForm({navigation}) {
   const [icon, setIcon] = useState('');
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(-1);
+  const [isEdition, setEdit] = useState(false);
 
   useEffect(() => {
     const getAccountEdit = () => {
@@ -68,7 +72,7 @@ export default function ContaForm({navigation}) {
         setDescription(state.params.conta.description);
         setBalance(state.params.conta.balance);
         setAccount(state.params.conta.account);
-        console.log(state.params.conta);
+        setEdit(true);
       }
     };
     getAccountEdit();
@@ -107,10 +111,7 @@ export default function ContaForm({navigation}) {
       .substr(2)
       .replace('.', '')
       .replace(',', '.');
-
-    console.log('remochar', removedChar);
     const patternParse = parseFloat(removedChar) * 100;
-    console.log('parse', patternParse);
     return `${patternParse}`;
   };
 
@@ -164,8 +165,51 @@ export default function ContaForm({navigation}) {
         balance: formatBalance(balance),
         account,
       };
-      console.log(data);
       saveAccount(data);
+    }
+  };
+
+  const askDelection = async () => {
+    Alert.alert(
+      'Atenção',
+      'Deseja realmente deletar essa conta?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => console.log('Cancel Pressed'),
+          style: {backgroundColor: 'red'},
+        },
+        {
+          text: 'Sim',
+          onPress: () => {
+            this.deleteAccount();
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
+  const deleteAccount = async () => {
+    setLoading(true);
+    const realm = await getRealm();
+    /*    const data = {
+      id,
+      atualizacao: getDate(),
+      description,
+      balance: balance,
+      account,
+    }; */
+    console.log(id);
+    try {
+      realm.write(() => {
+        realm.delete(realm.objectForPrimaryKey('contas', id));
+        setLoading(false);
+        navigation.goBack();
+      });
+    } catch (e) {
+      setLoading(false);
+      Alert.alert('Erro', `Ocorreu um erro, tente novamente. ${e}`);
     }
   };
 
@@ -223,6 +267,15 @@ export default function ContaForm({navigation}) {
           />
         </InputContainer>
       </Form>
+      {isEdition ? (
+        <ContainerFormFooter>
+          <BtnRemove onPress={() => deleteAccount()}>
+            <LabelBtnRemove>Deletar Conta</LabelBtnRemove>
+          </BtnRemove>
+        </ContainerFormFooter>
+      ) : (
+        <></>
+      )}
       <BtnNovaConta
         disabled={loading}
         activeOpacity={0.9}
@@ -230,7 +283,7 @@ export default function ContaForm({navigation}) {
         {loading ? (
           <ActivityIndicator size="large" color="#fff" />
         ) : (
-          <TxtNovaConta>SALVAR</TxtNovaConta>
+          <LabelBtn>SALVAR</LabelBtn>
         )}
       </BtnNovaConta>
     </Container>
