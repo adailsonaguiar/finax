@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StatusBar, ActivityIndicator, Alert} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 
@@ -22,6 +22,7 @@ import {
 } from './styles';
 
 export default function ContaForm({navigation}) {
+  const {state} = navigation;
   const [contas] = useState({
     '000': {label: 'Carteira', description: 'Dinheiro em espécie', code: '000'},
     '001': {
@@ -58,6 +59,20 @@ export default function ContaForm({navigation}) {
   const [account, setAccount] = useState('');
   const [icon, setIcon] = useState('');
   const [loading, setLoading] = useState(false);
+  const [id, setId] = useState(-1);
+
+  useEffect(() => {
+    const getAccountEdit = () => {
+      if (state.params) {
+        setId(state.params.conta.id);
+        setDescription(state.params.conta.description);
+        setBalance(state.params.conta.balance);
+        setAccount(state.params.conta.account);
+        console.log(state.params.conta);
+      }
+    };
+    getAccountEdit();
+  }, []);
 
   const setIconAccount = code => {
     setIcon(contas[code].icon);
@@ -70,8 +85,10 @@ export default function ContaForm({navigation}) {
   };
 
   const getId = async () => {
-    const realm = await getRealm();
-    return realm.objects('contas').max('id') + 1;
+    if (id == -1) {
+      const realm = await getRealm();
+      return realm.objects('contas').max('id') + 1;
+    }
   };
 
   const getDate = () => {
@@ -94,6 +111,7 @@ export default function ContaForm({navigation}) {
   };
 
   const resetForm = () => {
+    setId(-1);
     setDescription('');
     setBalance('');
     setAccount('');
@@ -105,7 +123,7 @@ export default function ContaForm({navigation}) {
     const realm = await getRealm();
     try {
       realm.write(() => {
-        realm.create('contas', account);
+        realm.create('contas', account, true);
         setLoading(false);
         resetForm();
         navigation.goBack();
@@ -130,9 +148,9 @@ export default function ContaForm({navigation}) {
   };
 
   const setObject = async () => {
-    let id = await getId();
+    setId(await getId());
     if (isNaN(id)) {
-      id = 1;
+      setId(1);
     }
     if (validateForm()) {
       const data = {
@@ -142,6 +160,7 @@ export default function ContaForm({navigation}) {
         balance: formatBalance(balance),
         account,
       };
+      console.log(data);
       saveAccount(data);
     }
   };
@@ -156,7 +175,7 @@ export default function ContaForm({navigation}) {
         </BtnFechar>
       </HeaderForm>
       <ContainerIcon>
-        <ImgConta src={icon} />
+        <ImgConta source={icon} />
       </ContainerIcon>
       <Form>
         <InputContainer>

@@ -61,7 +61,12 @@ const Carteiras = ({navigation}) => {
         <FlatList
           data={accounts}
           renderItem={({item}) => (
-            <Conta>
+            <Conta
+              onPress={() => {
+                navigation.navigate('ContaForm', {
+                  conta: item,
+                });
+              }}>
               <Icon source={getIcon(item)} />
               <ColLeft>
                 <TitleConta>{item.account}</TitleConta>
