@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StatusBar, ActivityIndicator, Alert} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
+import messageResponse from './../../utils/messageResponse';
 
 import getRealm from './../../services/realm';
 
@@ -62,7 +63,7 @@ export default function ContaForm({navigation}) {
   const [account, setAccount] = useState('');
   const [icon, setIcon] = useState('');
   const [loading, setLoading] = useState(false);
-  const [id, setId] = useState(-1);
+  const [id, setId] = useState(0);
   const [isEdition, setEdit] = useState(false);
 
   useEffect(() => {
@@ -73,6 +74,7 @@ export default function ContaForm({navigation}) {
         setBalance(state.params.conta.balance);
         setAccount(state.params.conta.account);
         setEdit(true);
+        console.log('teste');
       }
     };
     getAccountEdit();
@@ -88,11 +90,9 @@ export default function ContaForm({navigation}) {
     setIconAccount(code);
   };
 
-  const getId = async () => {
-    if (id == -1) {
-      const realm = await getRealm();
-      return realm.objects('contas').max('id') + 1;
-    }
+  const getId = async schema => {
+    const realm = await getRealm();
+    return realm.objects(schema).max('id') + 1;
   };
 
   const getDate = () => {
@@ -134,10 +134,10 @@ export default function ContaForm({navigation}) {
         navigation.goBack();
       });
     } catch (e) {
+      setLoading(false);
+      messageResponse.error(e);
       return e;
     }
-
-    return account;
   };
 
   const validateForm = () => {
@@ -153,13 +153,14 @@ export default function ContaForm({navigation}) {
   };
 
   const setObject = async () => {
-    setId(await getId());
-    if (isNaN(id)) {
-      setId(1);
+    const idMaxAccount = await getId('contas');
+    let idAccount = id;
+    if (!isEdition) {
+      idAccount = idMaxAccount;
     }
     if (validateForm()) {
       const data = {
-        id,
+        id: idAccount,
         atualizacao: getDate(),
         description,
         balance: formatBalance(balance),
@@ -176,7 +177,7 @@ export default function ContaForm({navigation}) {
       [
         {
           text: 'Cancelar',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => {},
           style: {backgroundColor: 'red'},
         },
         {
@@ -193,14 +194,6 @@ export default function ContaForm({navigation}) {
   const deleteAccount = async () => {
     setLoading(true);
     const realm = await getRealm();
-    /*    const data = {
-      id,
-      atualizacao: getDate(),
-      description,
-      balance: balance,
-      account,
-    }; */
-    console.log(id);
     try {
       realm.write(() => {
         realm.delete(realm.objectForPrimaryKey('contas', id));
@@ -209,7 +202,7 @@ export default function ContaForm({navigation}) {
       });
     } catch (e) {
       setLoading(false);
-      Alert.alert('Erro', `Ocorreu um erro, tente novamente. ${e}`);
+      messageResponse.error(e);
     }
   };
 
