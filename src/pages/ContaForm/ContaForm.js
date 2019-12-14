@@ -182,7 +182,7 @@ export default function ContaForm({navigation}) {
         {
           text: 'Sim',
           onPress: () => {
-            this.deleteAccount();
+            deleteAccount();
           },
         },
       ],
@@ -269,7 +269,7 @@ export default function ContaForm({navigation}) {
       </Form>
       {isEdition ? (
         <ContainerFormFooter>
-          <BtnRemove onPress={() => deleteAccount()}>
+          <BtnRemove onPress={() => askDelection()}>
             <LabelBtnRemove>Deletar Conta</LabelBtnRemove>
           </BtnRemove>
         </ContainerFormFooter>
