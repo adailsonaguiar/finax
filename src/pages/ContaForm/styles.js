@@ -1,13 +1,14 @@
 import styled from 'styled-components/native';
 import {StyleSheet} from 'react-native';
+import colors from '../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
-  background: #1e1e1e;
+  background: ${colors.dark};
 `;
 export const HeaderForm = styled.View`
   flex: 1;
-  background: #1e1e1e;
+  background: ${colors.dark};
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
@@ -17,15 +18,18 @@ export const HeaderForm = styled.View`
   margin-top: 30px;
 `;
 export const TxtHeaderForm = styled.Text`
-  color: #e1e1e1;
+  color: ${colors.fontLight};
   font-size: 30px;
   font-family: Roboto-Bold;
 `;
-export const BtnFechar = styled.TouchableOpacity``;
+export const BtnFechar = styled.TouchableOpacity`
+  width: 35px;
+  height: 35px;
+  align-items: flex-end;
+`;
 export const TxtBtnFechar = styled.Text`
-  color: #e1e1e1;
+  color: ${colors.fontLight};
   font-size: 25px;
-  font-family: Roboto-Light;
 `;
 export const Form = styled.View`
   justify-content: flex-start;
@@ -77,8 +81,8 @@ export const BtnNovaConta = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
 `;
-export const TxtNovaConta = styled.Text`
-  color: #e1e1e1;
+export const LabelBtn = styled.Text`
+  color: ${colors.fontLight};
   font-family: Roboto-Bold;
   font-size: 18px;
 `;
@@ -92,7 +96,28 @@ export const ContainerIcon = styled.View`
   align-items: center;
   padding-bottom: 10px;
 `;
-
+export const BtnRemove = styled.TouchableOpacity`
+  background: transparent;
+  border-width: 1px;
+  border-color: #383642;
+  height: 35px;
+  width: 230px;
+  border-radius: 24px;
+  align-items: center;
+  justify-content: center;
+`;
+export const LabelBtnRemove = styled.Text`
+  color: ${colors.fontLight};
+  font-family: Roboto-Medium;
+  font-size: 11px;
+  color: #95a5a6;
+`;
+export const ContainerFormFooter = styled.View`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+`;
 export const styles = StyleSheet.create({
   input: {color: 'white', fontSize: 17},
 });

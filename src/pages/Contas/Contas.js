@@ -61,14 +61,21 @@ const Carteiras = ({navigation}) => {
         <FlatList
           data={accounts}
           renderItem={({item}) => (
-            <Conta>
+            <Conta
+              onPress={() => {
+                navigation.navigate('ContaForm', {
+                  conta: item,
+                });
+              }}>
               <Icon source={getIcon(item)} />
               <ColLeft>
                 <TitleConta>{item.account}</TitleConta>
                 <CategoryConta>{item.description}</CategoryConta>
               </ColLeft>
               <ColRight>
-                <Saldo>R${`${Number.parseFloat(item.balance) / 100}`}</Saldo>
+                <Saldo>
+                  R${`${(Number.parseFloat(item.balance) / 100).toFixed(2)}`}
+                </Saldo>
                 <Atualizado>{item.atualizacao}</Atualizado>
               </ColRight>
             </Conta>

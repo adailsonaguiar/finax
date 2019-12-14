@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, ActivityIndicator, Alert} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
+import messageResponse from './../../utils/messageResponse';
 
 import getRealm from './../../services/realm';
 
@@ -14,14 +15,18 @@ import {
   InputContainer,
   Input,
   BtnNovaConta,
-  TxtNovaConta,
+  LabelBtn,
   styles,
   Picker,
   ImgConta,
   ContainerIcon,
+  BtnRemove,
+  LabelBtnRemove,
+  ContainerFormFooter,
 } from './styles';
 
 export default function ContaForm({navigation}) {
+  const {state} = navigation;
   const [contas] = useState({
     '000': {label: 'Carteira', description: 'Dinheiro em espécie', code: '000'},
     '001': {
@@ -55,80 +60,151 @@ export default function ContaForm({navigation}) {
   });
   const [description, setDescription] = useState('');
   const [balance, setBalance] = useState('');
-  const [account, setConta] = useState('');
+  const [account, setAccount] = useState('');
   const [icon, setIcon] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [id, setId] = useState(0);
+  const [isEdition, setEdit] = useState(false);
+
+  useEffect(() => {
+    const getAccountEdit = () => {
+      if (state.params) {
+        setId(state.params.conta.id);
+        setDescription(state.params.conta.description);
+        setBalance(state.params.conta.balance);
+        setAccount(state.params.conta.account);
+        setEdit(true);
+        console.log('teste');
+      }
+    };
+    getAccountEdit();
+  }, []);
 
   const setIconAccount = code => {
     setIcon(contas[code].icon);
   };
 
   const setPropertyAccount = code => {
-    setConta(code);
+    setAccount(code);
     setDescription(contas[code].description);
     setIconAccount(code);
   };
 
-  async function getId() {
+  const getId = async schema => {
     const realm = await getRealm();
-    return realm.objects('contas').max('id') + 1;
-  }
+    return realm.objects(schema).max('id') + 1;
+  };
 
-  function getDate() {
+  const getDate = () => {
     const date = new Date();
     const day =
-      date.getDay() < 10 ? `0${date.getDay() + 1}` : `${date.getDay() + 1}`;
+      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
     const month =
       date.getMonth() < 10
         ? `0${date.getMonth() + 1}`
         : `${date.getMonth() + 1}`;
     return `${day}/${month}/${date.getFullYear()}`;
-  }
+  };
 
-  function formatBalance(balance) {
-    const patternParse = balance
+  const formatBalance = balance => {
+    const removedChar = balance
+      .substr(2)
       .replace('.', '')
-      .replace(',', '.')
-      .substr(2);
-    return `${Number.parseFloat(patternParse * 100)}`;
-  }
+      .replace(',', '.');
+    const patternParse = parseFloat(removedChar) * 100;
+    return `${patternParse}`;
+  };
 
-  async function setObject() {
-    let id = await getId();
-    if (isNaN(id)) {
-      id = 1;
-    }
-    /*  if (description.length === 0) {
-      return alert('Digite uma descrição!');
-    }
-    if (balance.length === 0) {
-      return alert('Digite o saldo da conta!');
-    }
-    if (account.length === 0) {
-      return alert('Selecione uma conta!');
-    } */
-    return {
-      id,
-      atualizacao: getDate(),
-      description,
-      balance: formatBalance(balance),
-      account,
-    };
-  }
+  const resetForm = () => {
+    setId(-1);
+    setDescription('');
+    setBalance('');
+    setAccount('');
+    setIcon('');
+  };
 
-  async function saveAccount() {
-    const account = await setObject();
+  const saveAccount = async account => {
+    setLoading(true);
     const realm = await getRealm();
-
     try {
       realm.write(() => {
-        realm.create('contas', account);
+        realm.create('contas', account, true);
+        setLoading(false);
+        resetForm();
+        navigation.goBack();
       });
     } catch (e) {
+      setLoading(false);
+      messageResponse.error(e);
       return e;
     }
-    alert('Conta salva com sucesso!');
-    return account;
-  }
+  };
+
+  const validateForm = () => {
+    if (description.length == 0) {
+      Alert.alert('Atenção', 'Digite uma descrição!');
+      return false;
+    }
+    if (balance.length == 0) {
+      Alert.alert('Atenção', 'Preencha o saldo da conta!');
+      return false;
+    }
+    return true;
+  };
+
+  const setObject = async () => {
+    const idMaxAccount = await getId('contas');
+    let idAccount = id;
+    if (!isEdition) {
+      idAccount = idMaxAccount;
+    }
+    if (validateForm()) {
+      const data = {
+        id: idAccount,
+        atualizacao: getDate(),
+        description,
+        balance: formatBalance(balance),
+        account,
+      };
+      saveAccount(data);
+    }
+  };
+
+  const askDelection = async () => {
+    Alert.alert(
+      'Atenção',
+      'Deseja realmente deletar essa conta?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => {},
+          style: {backgroundColor: 'red'},
+        },
+        {
+          text: 'Sim',
+          onPress: () => {
+            deleteAccount();
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
+  const deleteAccount = async () => {
+    setLoading(true);
+    const realm = await getRealm();
+    try {
+      realm.write(() => {
+        realm.delete(realm.objectForPrimaryKey('contas', id));
+        setLoading(false);
+        navigation.goBack();
+      });
+    } catch (e) {
+      setLoading(false);
+      messageResponse.error(e);
+    }
+  };
 
   return (
     <Container>
@@ -184,8 +260,24 @@ export default function ContaForm({navigation}) {
           />
         </InputContainer>
       </Form>
-      <BtnNovaConta activeOpacity={0.9} onPress={() => saveAccount()}>
-        <TxtNovaConta>SALVAR</TxtNovaConta>
+      {isEdition ? (
+        <ContainerFormFooter>
+          <BtnRemove onPress={() => askDelection()}>
+            <LabelBtnRemove>Deletar Conta</LabelBtnRemove>
+          </BtnRemove>
+        </ContainerFormFooter>
+      ) : (
+        <></>
+      )}
+      <BtnNovaConta
+        disabled={loading}
+        activeOpacity={0.9}
+        onPress={() => setObject()}>
+        {loading ? (
+          <ActivityIndicator size="large" color="#fff" />
+        ) : (
+          <LabelBtn>SALVAR</LabelBtn>
+        )}
       </BtnNovaConta>
     </Container>
   );

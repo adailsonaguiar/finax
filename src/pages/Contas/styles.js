@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
+import colors from '../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
-  background: #121212;
+  background: ${colors.dark};
 `;
 export const HerderList = styled.View`
   flex: 1;
@@ -12,7 +13,7 @@ export const HerderList = styled.View`
   margin-top: 10px;
 `;
 export const TitleComponent = styled.Text`
-  color: #e1e1e1;
+  color: ${colors.fontLight};
   font-size: 30px;
   font-family: Roboto-Bold;
 `;
@@ -34,8 +35,8 @@ export const Conta = styled.TouchableOpacity`
   padding-right: 20px;
 `;
 export const Icon = styled.Image`
-  width: 55px;
-  height: 55px;
+  width: 30px;
+  height: 30px;
 `;
 export const ColLeft = styled.View`
   flex-direction: column;
@@ -44,13 +45,14 @@ export const ColLeft = styled.View`
   flex: 2;
 `;
 export const TitleConta = styled.Text`
-  color: #e1e1e1;
-  font-size: 19px;
+  color: ${colors.fontLight};
+  font-size: 16px;
   font-family: Roboto-Bold;
 `;
 export const CategoryConta = styled.Text`
-  color: #444359;
-  font-family: Roboto-Medium;
+  color: #90909c;
+  font-family: Roboto-Regular;
+  font-size: 11px;
 `;
 export const ColRight = styled.View`
   flex-direction: column;
@@ -58,13 +60,14 @@ export const ColRight = styled.View`
   flex: 2;
 `;
 export const Saldo = styled.Text`
-  color: #e1e1e1;
-  font-size: 19px;
+  color: ${colors.fontLight};
+  font-size: 16px;
   font-family: Roboto-Bold;
 `;
 export const Atualizado = styled.Text`
-  color: #444359;
-  font-family: Roboto-Medium;
+  color: #90909c;
+  font-family: Roboto-Regular;
+  font-size: 11px;
 `;
 export const Footer = styled.View`
   background: #191919;
@@ -74,9 +77,10 @@ export const Footer = styled.View`
   flex-direction: row;
 `;
 export const SaldoTotal = styled.Text`
-  color: #e1e1e1;
+  color: ${colors.fontLight};
   flex: 3;
   font-family: Roboto-Medium;
+  font-size: 11px;
 `;
 export const BtnNovaConta = styled.TouchableOpacity`
   background: #282828;
@@ -89,6 +93,7 @@ export const BtnNovaConta = styled.TouchableOpacity`
   margin-right: 20px;
 `;
 export const TxtNovaConta = styled.Text`
-  color: #e1e1e1;
+  color: ${colors.fontLight};
   font-family: Roboto-Bold;
+  font-size: 11px;
 `;
