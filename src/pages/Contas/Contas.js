@@ -25,8 +25,8 @@ import {
 } from './styles';
 
 const bbicon = require('../../assets/contas/bbicon.png');
-const ricoicon = require('../../assets/contas/ricoicon.png');
 const nuicon = require('../../assets/contas/nuicon.png');
+import standard_icon from './../../assets/contas/standard_icon.png';
 
 const Carteiras = ({navigation}) => {
   const [accounts, setAccounts] = useState([]);
@@ -34,8 +34,8 @@ const Carteiras = ({navigation}) => {
     async function loadAccounts() {
       const realm = await getRealm();
       const data = realm.objects('contas').sorted('id', 1);
+      console.log('passou');
       setAccounts(data);
-      return data;
     }
     loadAccounts();
   }, []);
@@ -47,6 +47,7 @@ const Carteiras = ({navigation}) => {
     if (account.account === '260') {
       return nuicon;
     }
+    return standard_icon;
   }
 
   return (
