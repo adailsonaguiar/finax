@@ -103,11 +103,15 @@ export default function ContaForm({navigation}) {
   };
 
   const formatBalance = balance => {
-    const patternParse = balance
+    const removedChar = balance
+      .substr(2)
       .replace('.', '')
-      .replace(',', '.')
-      .substr(2);
-    return `${Number.parseFloat(patternParse * 100)}`;
+      .replace(',', '.');
+
+    console.log('remochar', removedChar);
+    const patternParse = parseFloat(removedChar) * 100;
+    console.log('parse', patternParse);
+    return `${patternParse}`;
   };
 
   const resetForm = () => {

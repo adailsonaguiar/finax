@@ -4,11 +4,11 @@ import colors from '../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
-  background: ${colors.backgroundForm};
+  background: ${colors.dark};
 `;
 export const HeaderForm = styled.View`
   flex: 1;
-  background: ${colors.backgroundForm};
+  background: ${colors.dark};
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
