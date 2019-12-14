@@ -73,7 +73,9 @@ const Carteiras = ({navigation}) => {
                 <CategoryConta>{item.description}</CategoryConta>
               </ColLeft>
               <ColRight>
-                <Saldo>R${`${Number.parseFloat(item.balance) / 100}`}</Saldo>
+                <Saldo>
+                  R${`${(Number.parseFloat(item.balance) / 100).toFixed(2)}`}
+                </Saldo>
                 <Atualizado>{item.atualizacao}</Atualizado>
               </ColRight>
             </Conta>
