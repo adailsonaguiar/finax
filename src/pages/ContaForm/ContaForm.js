@@ -211,7 +211,6 @@ export default function ContaForm({navigation}) {
         </TxtHeaderForm>
         <BtnFechar
           onPress={async () => {
-            await state.params.loadAccounts();
             navigation.goBack();
           }}>
           <Icon name="close" color="#fff" size={30} />

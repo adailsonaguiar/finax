@@ -8,7 +8,7 @@ import {
   Container,
   HerderList,
   TitleComponent,
-  Date,
+  TxtDate,
   Conta,
   Icon,
   TitleConta,
@@ -27,9 +27,24 @@ import {
 const Carteiras = ({navigation}) => {
   const [arrayAccounts] = useState(accountsUtil);
   const [accounts, setAccounts] = useState([]);
+  const [currentDate, setCurrentDate] = useState('');
+  const [totalValue, setTotalValue] = useState(0);
   useEffect(() => {
     loadAccounts();
+    getDate();
+    sumTotalValue();
   }, []);
+
+  const getDate = () => {
+    const date = new Date();
+    const day =
+      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    const month =
+      date.getMonth() < 10
+        ? `0${date.getMonth() + 1}`
+        : `${date.getMonth() + 1}`;
+    setCurrentDate(`${day}/${month}/${date.getFullYear()}`);
+  };
 
   async function loadAccounts() {
     const realm = await getRealm();
@@ -37,9 +52,45 @@ const Carteiras = ({navigation}) => {
     setAccounts(data);
   }
 
-  function getIcon(account) {
-    return arrayAccounts[account.account].icon;
-  }
+  const sumTotalValue = () => {
+    let sumValue = 0;
+    accounts.forEach(account => {
+      sumValue += account.balance;
+    });
+    setTotalValue(formatMoney(sumValue));
+  };
+
+  const formatMoney = value => {
+    let amount = value / 100;
+    let decimalCount = 2;
+    let decimal = ',';
+    let thousands = '.';
+    try {
+      decimalCount = Math.abs(decimalCount);
+      decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+      const negativeSign = amount < 0 ? '-' : '';
+
+      let i = parseInt(
+        (amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)),
+      ).toString();
+      let j = i.length > 3 ? i.length % 3 : 0;
+
+      return (
+        negativeSign +
+        (j ? i.substr(0, j) + thousands : '') +
+        i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands) +
+        (decimalCount
+          ? decimal +
+            Math.abs(amount - i)
+              .toFixed(decimalCount)
+              .slice(2)
+          : '')
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
@@ -47,7 +98,7 @@ const Carteiras = ({navigation}) => {
       <Header title="Dezembro" />
       <HerderList>
         <TitleComponent>SUAS CONTAS</TitleComponent>
-        <Date>22/12/2019</Date>
+        <TxtDate>{currentDate}</TxtDate>
       </HerderList>
       <Lista>
         <FlatList
@@ -60,15 +111,13 @@ const Carteiras = ({navigation}) => {
                   loadAccounts: loadAccounts,
                 });
               }}>
-              <Icon source={getIcon(item)} />
+              <Icon source={arrayAccounts[item.account].icon} />
               <ColLeft>
-                <TitleConta>{item.account}</TitleConta>
+                <TitleConta>{arrayAccounts[item.account].label}</TitleConta>
                 <CategoryConta>{item.description}</CategoryConta>
               </ColLeft>
               <ColRight>
-                <Saldo>
-                  R${`${(Number.parseFloat(item.balance) / 100).toFixed(2)}`}
-                </Saldo>
+                <Saldo>R${`${formatMoney(item.balance)}`}</Saldo>
                 <Atualizado>{item.atualizacao}</Atualizado>
               </ColRight>
             </Conta>
@@ -77,7 +126,7 @@ const Carteiras = ({navigation}) => {
         />
       </Lista>
       <Footer>
-        <SaldoTotal>Saldo das contas: R$ 16.241,71</SaldoTotal>
+        <SaldoTotal>Saldo das contas: R$ {totalValue}</SaldoTotal>
         <BtnNovaConta
           onPress={() => {
             navigation.navigate('ContaForm', {

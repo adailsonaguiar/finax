@@ -17,7 +17,7 @@ export const TitleComponent = styled.Text`
   font-size: 30px;
   font-family: Roboto-Bold;
 `;
-export const Date = styled.Text`
+export const TxtDate = styled.Text`
   color: #95a5a6;
   font-size: 12px;
   font-family: Roboto-Medium;
@@ -46,7 +46,7 @@ export const ColLeft = styled.View`
 `;
 export const TitleConta = styled.Text`
   color: ${colors.fontLight};
-  font-size: 16px;
+  font-size: 15px;
   font-family: Roboto-Bold;
 `;
 export const CategoryConta = styled.Text`
