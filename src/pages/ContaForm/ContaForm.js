@@ -41,17 +41,17 @@ export default function ContaForm({navigation}) {
 
   useEffect(() => {
     const detectionAccountParams = () => {
-      if (state.params) {
+      if (state.params.account) {
         setEdit(true);
         return true;
       }
       return false;
     };
     const getAccountEdit = () => {
-      setAccount(state.params.conta.account);
-      setId(state.params.conta.id);
-      setDescription(state.params.conta.description);
-      setBalance(state.params.conta.balance / 100);
+      setAccount(state.params.account.account);
+      setId(state.params.account.id);
+      setDescription(state.params.account.description);
+      setBalance(state.params.account.balance / 100);
     };
     if (detectionAccountParams()) {
       setTimeout(() => {
@@ -122,6 +122,7 @@ export default function ContaForm({navigation}) {
         realm.create('contas', account, true);
         setLoading(false);
         resetForm();
+        state.params.loadAccounts();
         navigation.goBack();
       });
     } catch (e) {
@@ -192,6 +193,7 @@ export default function ContaForm({navigation}) {
       realm.write(() => {
         realm.delete(realm.objectForPrimaryKey('contas', id));
         setLoading(false);
+        state.params.loadAccounts();
         navigation.goBack();
       });
     } catch (e) {
@@ -208,11 +210,9 @@ export default function ContaForm({navigation}) {
           {isEdition ? 'ATUALIZAR CONTA' : 'NOVA CONTA'}
         </TxtHeaderForm>
         <BtnFechar
-          onPress={() => {
-            // navigation.goBack()
-            navigation.navigate('Contas', {
-              refresh: true,
-            });
+          onPress={async () => {
+            await state.params.loadAccounts();
+            navigation.goBack();
           }}>
           <Icon name="close" color="#fff" size={30} />
         </BtnFechar>

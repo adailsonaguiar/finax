@@ -28,14 +28,14 @@ const Carteiras = ({navigation}) => {
   const [arrayAccounts] = useState(accountsUtil);
   const [accounts, setAccounts] = useState([]);
   useEffect(() => {
-    async function loadAccounts() {
-      const realm = await getRealm();
-      const data = realm.objects('contas').sorted('id', 1);
-      console.log('passou');
-      setAccounts(data);
-    }
     loadAccounts();
   }, []);
+
+  async function loadAccounts() {
+    const realm = await getRealm();
+    const data = realm.objects('contas').sorted('id', 1);
+    setAccounts(data);
+  }
 
   function getIcon(account) {
     return arrayAccounts[account.account].icon;
@@ -56,7 +56,8 @@ const Carteiras = ({navigation}) => {
             <Conta
               onPress={() => {
                 navigation.navigate('ContaForm', {
-                  conta: item,
+                  account: item,
+                  loadAccounts: loadAccounts,
                 });
               }}>
               <Icon source={getIcon(item)} />
@@ -77,12 +78,15 @@ const Carteiras = ({navigation}) => {
       </Lista>
       <Footer>
         <SaldoTotal>Saldo das contas: R$ 16.241,71</SaldoTotal>
-        <BtnNovaConta onPress={() => navigation.navigate('ContaForm')}>
+        <BtnNovaConta
+          onPress={() => {
+            navigation.navigate('ContaForm', {
+              loadAccounts: loadAccounts,
+            });
+          }}>
           <TxtNovaConta>Adicionar Conta</TxtNovaConta>
         </BtnNovaConta>
       </Footer>
-      {/*       <Button onPress={() => navigation.navigate('NovaDespesa')} title="Nova" />
-       */}
     </Container>
   );
 };
