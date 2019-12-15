@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StatusBar, FlatList} from 'react-native';
 import Header from '../../components/Header/Header';
-
+import accountsUtil from '../../utils/accounts';
 import getRealm from './../../services/realm';
 
 import {
@@ -24,11 +24,8 @@ import {
   TxtNovaConta,
 } from './styles';
 
-const bbicon = require('../../assets/contas/bbicon.png');
-const nuicon = require('../../assets/contas/nuicon.png');
-import standard_icon from './../../assets/contas/standard_icon.png';
-
 const Carteiras = ({navigation}) => {
+  const [arrayAccounts] = useState(accountsUtil);
   const [accounts, setAccounts] = useState([]);
   useEffect(() => {
     async function loadAccounts() {
@@ -41,13 +38,7 @@ const Carteiras = ({navigation}) => {
   }, []);
 
   function getIcon(account) {
-    if (account.account === '001') {
-      return bbicon;
-    }
-    if (account.account === '260') {
-      return nuicon;
-    }
-    return standard_icon;
+    return arrayAccounts[account.account].icon;
   }
 
   return (
