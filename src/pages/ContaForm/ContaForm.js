@@ -4,15 +4,14 @@ import {TextInputMask} from 'react-native-masked-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import messageResponse from './../../utils/messageResponse';
 import colors from '../../styles/colors';
-
 import getRealm from './../../services/realm';
+import accounts from '../../utils/accounts';
 
 import {
   Container,
   TxtHeaderForm,
   HeaderForm,
   BtnFechar,
-  TxtBtnFechar,
   Form,
   InputContainer,
   Input,
@@ -27,56 +26,11 @@ import {
   ContainerFormFooter,
 } from './styles';
 
-import bb_icon from './../../assets/contas/bbicon.png';
-import nu_icon from './../../assets/contas/nuicon.png';
 import standard_icon from './../../assets/contas/standard_icon.png';
 
 export default function ContaForm({navigation}) {
   const {state} = navigation;
-  const [contas] = useState({
-    '000': {
-      label: 'Carteira',
-      description: 'Dinheiro em espécie',
-      code: '000',
-      icon: standard_icon,
-    },
-    '001': {
-      label: 'Banco do Brasil - 001',
-      description: 'Conta Corrente',
-      code: '001',
-      icon: bb_icon,
-    },
-    '104': {
-      label: 'Caixa Econômica - 104',
-      description: 'Conta Corrente',
-      code: '104',
-      icon: standard_icon,
-    },
-    '260': {
-      label: 'Nuconta - 260',
-      description: 'Conta Poupança / Investimento',
-      code: '260',
-      icon: nu_icon,
-    },
-    '204': {
-      label: 'Bradesco - 204',
-      description: 'Conta Corrente',
-      code: '204',
-      icon: standard_icon,
-    },
-    '033': {
-      label: 'Santander - 033',
-      description: 'Conta Corrente',
-      code: '033',
-      icon: standard_icon,
-    },
-    '341': {
-      label: 'Itaú - 341',
-      description: 'Conta Corrente',
-      code: '341',
-      icon: standard_icon,
-    },
-  });
+  const [contas] = useState(accounts);
   const [description, setDescription] = useState('');
   const [balance, setBalance] = useState(0);
   const [account, setAccount] = useState('');
@@ -87,17 +41,17 @@ export default function ContaForm({navigation}) {
 
   useEffect(() => {
     const detectionAccountParams = () => {
-      if (state.params) {
+      if (state.params.account) {
         setEdit(true);
         return true;
       }
       return false;
     };
     const getAccountEdit = () => {
-      setAccount(state.params.conta.account);
-      setId(state.params.conta.id);
-      setDescription(state.params.conta.description);
-      setBalance(state.params.conta.balance / 100);
+      setAccount(state.params.account.account);
+      setId(state.params.account.id);
+      setDescription(state.params.account.description);
+      setBalance(state.params.account.balance / 100);
     };
     if (detectionAccountParams()) {
       setTimeout(() => {
@@ -168,6 +122,7 @@ export default function ContaForm({navigation}) {
         realm.create('contas', account, true);
         setLoading(false);
         resetForm();
+        state.params.loadAccounts();
         navigation.goBack();
       });
     } catch (e) {
@@ -238,6 +193,7 @@ export default function ContaForm({navigation}) {
       realm.write(() => {
         realm.delete(realm.objectForPrimaryKey('contas', id));
         setLoading(false);
+        state.params.loadAccounts();
         navigation.goBack();
       });
     } catch (e) {
@@ -254,11 +210,8 @@ export default function ContaForm({navigation}) {
           {isEdition ? 'ATUALIZAR CONTA' : 'NOVA CONTA'}
         </TxtHeaderForm>
         <BtnFechar
-          onPress={() => {
-            // navigation.goBack()
-            navigation.navigate('Contas', {
-              refresh: true,
-            });
+          onPress={async () => {
+            navigation.goBack();
           }}>
           <Icon name="close" color="#fff" size={30} />
         </BtnFechar>

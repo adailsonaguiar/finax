@@ -27,10 +27,6 @@ export const BtnFechar = styled.TouchableOpacity`
   height: 35px;
   align-items: flex-end;
 `;
-export const TxtBtnFechar = styled.Text`
-  color: ${colors.fontLight};
-  font-size: 25px;
-`;
 export const Form = styled.View`
   justify-content: flex-start;
   flex: 7;
