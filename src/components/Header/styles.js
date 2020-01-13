@@ -15,3 +15,8 @@ export const Title = styled.Text`
   font-size: 17px;
   font-family: Roboto-Bold;
 `;
+
+export const Month = styled.Text`
+  color: #fff;
+  font-weight: bold;
+`;
