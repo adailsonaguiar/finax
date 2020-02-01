@@ -7,8 +7,7 @@ import ThemeContext from './../../styles/themes/context';
 import {ThemeProvider} from 'styled-components';
 import getRealm from './../../services/realm';
 import DatePicker from 'react-native-datepicker';
-import NumberFormat from 'react-number-format';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 
 import {
   Container,
@@ -17,8 +16,7 @@ import {
   LabelButton,
   Form,
 } from './styles';
-
-export default NovaDespesa = ({navigation}) => {
+const NovaDespesa = ({navigation}) => {
   const [type] = useState('expense');
   const [description, setDescription] = useState(0);
   const [value, setValue] = useState(0);
@@ -174,3 +172,5 @@ export default NovaDespesa = ({navigation}) => {
     </Container>
   );
 };
+
+export default NovaDespesa;

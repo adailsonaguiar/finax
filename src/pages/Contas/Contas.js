@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {StatusBar, FlatList} from 'react-native';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 import accountsUtil from '../../utils/accounts';
 import getRealm from './../../services/realm';
 
@@ -24,7 +24,7 @@ import {
   TxtNovaConta,
 } from './styles';
 
-const Carteiras = ({navigation}) => {
+const Contas = ({navigation}) => {
   const [arrayAccounts] = useState(accountsUtil);
   const [accounts, setAccounts] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
@@ -146,4 +146,4 @@ const Carteiras = ({navigation}) => {
   );
 };
 
-export default Carteiras;
+export default Contas;

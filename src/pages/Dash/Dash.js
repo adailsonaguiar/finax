@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 import {Container, CompHead, TitleGrid} from './styles';
 import getRealm from '../../services/realm';
 
@@ -12,7 +12,7 @@ import {
   TitleTransacao,
 } from '../../components/TransacaoStyles';
 
-export default  Dash = () => {
+export default Dash = () => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => loadRepositories(), []);
@@ -27,7 +27,7 @@ export default  Dash = () => {
 
   return (
     <Container>
-      <Header  />
+      <Header />
       <StatusBar barStyle="dark-content" backgroundColor="#f2f2f2" />
       <CompHead>
         <Text style={styles.txtSaldo}>R$ 9.857,96</Text>
