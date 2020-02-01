@@ -4,6 +4,9 @@ import Header from '../../components/Header';
 import accountsUtil from '../../utils/accounts';
 import getRealm from './../../services/realm';
 
+import Notification from '../../services/Notification';
+import OneSignal from 'react-native-onesignal';
+
 import {
   Container,
   HerderList,
@@ -34,6 +37,11 @@ const Contas = ({navigation}) => {
     loadAccounts();
     getDate();
     sumTotalValue();
+
+    OneSignal.init('9bda8b10-9cdb-4b61-81ca-0cae03856b68');
+    OneSignal.addEventListener('received', receivedPush());
+    OneSignal.addEventListener('opened', openedPush());
+    OneSignal.addEventListener('ids', idsPush());
   }, []);
 
   const getDate = () => {
@@ -46,6 +54,17 @@ const Contas = ({navigation}) => {
         : `${date.getMonth() + 1}`;
     setCurrentDate(`${day}/${month}/${date.getFullYear()}`);
   };
+
+  function receivedPush(push) {
+    console.log('received Push', push);
+  }
+  function openedPush(push) {
+    console.log('Opened Push', push);
+  }
+
+  function idsPush(push) {
+    console.log('IDS Push', push);
+  }
 
   async function loadAccounts() {
     const realm = await getRealm();
@@ -94,7 +113,10 @@ const Contas = ({navigation}) => {
   };
 
   const log = () => {
-    console.log(monthParent);
+    Notification.configure().localNotificationSchedule({
+      message: 'Olá,tudo bem?',
+      date: new Date(Date.now() + 3000),
+    });
   };
 
   return (
