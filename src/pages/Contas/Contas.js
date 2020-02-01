@@ -28,6 +28,7 @@ const Carteiras = ({navigation}) => {
   const [arrayAccounts] = useState(accountsUtil);
   const [accounts, setAccounts] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
+  const [monthParent, setMonthParent] = useState('');
   const [totalValue, setTotalValue] = useState(0);
   useEffect(() => {
     loadAccounts();
@@ -92,6 +93,10 @@ const Carteiras = ({navigation}) => {
     }
   };
 
+  const log = () => {
+    console.log(monthParent);
+  };
+
   return (
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
@@ -129,9 +134,10 @@ const Carteiras = ({navigation}) => {
         <SaldoTotal>Saldo das contas: R$ {totalValue}</SaldoTotal>
         <BtnNovaConta
           onPress={() => {
-            navigation.navigate('ContaForm', {
+            /* navigation.navigate('ContaForm', {
               loadAccounts: loadAccounts,
-            });
+            }); */
+            log();
           }}>
           <TxtNovaConta>Adicionar Conta</TxtNovaConta>
         </BtnNovaConta>
