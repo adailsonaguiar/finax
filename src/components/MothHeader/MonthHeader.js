@@ -13,10 +13,9 @@ export default function MothHeader() {
 
   const getDate = () => {
     const date = new Date();
-    const month =
-      date.getMonth() < 10 ? `0${date.getMonth()}` : `${date.getMonth()}`;
-    setMonth(month);
+    setMonth(date.getMonth());
     setYear(date.getFullYear());
+    console.log(date, month);
   };
 
   const nextMonth = () => {
