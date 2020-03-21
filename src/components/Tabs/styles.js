@@ -27,7 +27,7 @@ export const TabItem = styled.TouchableOpacity.attrs({
 
 export const TitleCard = styled.Text`
   color: #fff;
-  font-family: Roboto-Regular;
+  font-family: Roboto-Light;
   font-size: 13px;
   padding-bottom: 10px;
 `;

@@ -8,13 +8,13 @@ import contasIcon from '../../assets/cardIcons/contas.png';
 const Tabs = ({translateY, navigation}) => {
   return (
     <TabsContainer showsHorizontalScrollIndicator={false}>
-      <TabItem onPress={() => console.log('teste')}>
+      <TabItem onPress={() => navigation.navigate('DespesasForm')}>
         <IconArea>
           <ImageIcon source={despesaIcon} />
         </IconArea>
         <TitleCard>Despesas</TitleCard>
       </TabItem>
-      <TabItem onPress={() => console.log('teste')}>
+      <TabItem onPress={() => navigation.navigate('Transacoes')}>
         <IconArea>
           <ImageIcon source={transacoesIcon} />
         </IconArea>
