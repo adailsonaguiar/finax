@@ -6,6 +6,8 @@ import messageResponse from './../../utils/messageResponse';
 import colors from '../../styles/colors';
 import getRealm from './../../services/realm';
 import accounts from '../../utils/accounts';
+import {useDispatch} from 'react-redux';
+import {loadAccounts} from '../../store/accounts/actions';
 
 import {
   Container,
@@ -38,6 +40,7 @@ export default function ContaForm({navigation}) {
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(0);
   const [isEdition, setEdit] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const detectionAccountParams = () => {
@@ -91,7 +94,7 @@ export default function ContaForm({navigation}) {
       date.getMonth() < 10
         ? `0${date.getMonth() + 1}`
         : `${date.getMonth() + 1}`;
-    return `${day}/${month}/${date.getFullYear()}`;
+    return {day: `${day}`, month: `${month}`, year: `${date.getFullYear()}`};
   };
 
   const formatBalance = balance => {
@@ -114,6 +117,10 @@ export default function ContaForm({navigation}) {
     setIcon('');
   };
 
+  const handleLoadAccounts = () => {
+    dispatch(loadAccounts());
+  };
+
   const saveAccount = async account => {
     setLoading(true);
     const realm = await getRealm();
@@ -122,7 +129,7 @@ export default function ContaForm({navigation}) {
         realm.create('contas', account, true);
         setLoading(false);
         resetForm();
-        state.params.loadAccounts();
+        handleLoadAccounts();
         navigation.goBack();
       });
     } catch (e) {
@@ -154,9 +161,12 @@ export default function ContaForm({navigation}) {
       idAccount = idMaxAccount;
     }
     if (validateForm()) {
+      const {day, month, year} = getDate();
       const data = {
         id: idAccount,
-        atualizacao: getDate(),
+        day,
+        month,
+        year,
         description,
         balance: valueBalance,
         account,

@@ -4,7 +4,9 @@ export default class ContasSchema {
     primaryKey: 'id',
     properties: {
       id: {type: 'int', indexed: true},
-      atualizacao: 'string',
+      day: 'string',
+      month: 'string',
+      year: 'string',
       description: 'string',
       balance: 'float',
       account: 'string',

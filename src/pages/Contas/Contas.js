@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {StatusBar, FlatList} from 'react-native';
 import Header from '../../components/Header/Header';
 import accountsUtil from '../../utils/accounts';
-import getRealm from './../../services/realm';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadAccounts} from '../../store/accounts/actions';
 
 import {
   Container,
@@ -26,15 +27,19 @@ import {
 
 const Carteiras = ({navigation}) => {
   const [arrayAccounts] = useState(accountsUtil);
-  const [accounts, setAccounts] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
-  const [monthParent, setMonthParent] = useState('');
   const [totalValue, setTotalValue] = useState(0);
+  const dispatch = useDispatch();
+  const accounts = useSelector(state => state.accounts.accounts);
+
   useEffect(() => {
-    loadAccounts();
     getDate();
     sumTotalValue();
   }, []);
+
+  const handleLoadAccounts = () => {
+    dispatch(loadAccounts());
+  };
 
   const getDate = () => {
     const date = new Date();
@@ -46,12 +51,6 @@ const Carteiras = ({navigation}) => {
         : `${date.getMonth() + 1}`;
     setCurrentDate(`${day}/${month}/${date.getFullYear()}`);
   };
-
-  async function loadAccounts() {
-    const realm = await getRealm();
-    const data = realm.objects('contas').sorted('id', 1);
-    setAccounts(data);
-  }
 
   const sumTotalValue = () => {
     let sumValue = 0;
@@ -93,10 +92,6 @@ const Carteiras = ({navigation}) => {
     }
   };
 
-  const log = () => {
-    console.log(monthParent);
-  };
-
   return (
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
@@ -113,7 +108,6 @@ const Carteiras = ({navigation}) => {
               onPress={() => {
                 navigation.navigate('ContaForm', {
                   account: item,
-                  loadAccounts: loadAccounts,
                 });
               }}>
               <Icon source={arrayAccounts[item.account].icon} />
@@ -123,7 +117,7 @@ const Carteiras = ({navigation}) => {
               </ColLeft>
               <ColRight>
                 <Saldo>R${`${formatMoney(item.balance)}`}</Saldo>
-                <Atualizado>{item.atualizacao}</Atualizado>
+                <Atualizado>{`${item.day}/${item.month}/${item.year}`}</Atualizado>
               </ColRight>
             </Conta>
           )}
@@ -134,10 +128,7 @@ const Carteiras = ({navigation}) => {
         <SaldoTotal>Saldo das contas: R$ {totalValue}</SaldoTotal>
         <BtnNovaConta
           onPress={() => {
-            /* navigation.navigate('ContaForm', {
-              loadAccounts: loadAccounts,
-            }); */
-            log();
+            navigation.navigate('ContaForm', {});
           }}>
           <TxtNovaConta>Adicionar Conta</TxtNovaConta>
         </BtnNovaConta>
