@@ -4,11 +4,13 @@ export default class TransactionSchema {
     primaryKey: 'id',
     properties: {
       id: {type: 'int', indexed: true},
-      type: 'string',
       description: 'string',
       value: 'string',
-      date: 'string',
-      category: 'string',
+      day: 'string',
+      month: 'string',
+      year: 'string',
+      type: 'string',
+      accountId: 'int',
       status: 'int',
     },
   };
