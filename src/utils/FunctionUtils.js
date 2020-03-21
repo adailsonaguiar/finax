@@ -1,6 +1,3 @@
-export function monthSetTwoDigits(month) {
-  if (month < 10) {
-    return `0${month}`;
-  }
-  return `${month}`;
+export function setTwoDigits(month) {
+  return month < 10 ? `0${month}` : `${month}`;
 }

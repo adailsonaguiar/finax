@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header';
 import accountsUtil from '../../utils/accounts';
 import {useDispatch, useSelector} from 'react-redux';
 import {loadAccounts} from '../../store/accounts/actions';
+import {setTwoDigits} from '../../utils/FunctionUtils';
 
 import {
   Container,
@@ -29,6 +30,8 @@ const Carteiras = ({navigation}) => {
   const [arrayAccounts] = useState(accountsUtil);
   const [currentDate, setCurrentDate] = useState('');
   const [totalValue, setTotalValue] = useState(0);
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
   const dispatch = useDispatch();
   const accounts = useSelector(state => state.accounts.accounts);
 
@@ -37,19 +40,14 @@ const Carteiras = ({navigation}) => {
     sumTotalValue();
   }, []);
 
-  const handleLoadAccounts = () => {
-    dispatch(loadAccounts());
-  };
-
   const getDate = () => {
     const date = new Date();
-    const day =
-      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    const month =
-      date.getMonth() < 10
-        ? `0${date.getMonth() + 1}`
-        : `${date.getMonth() + 1}`;
+    const day = setTwoDigits(date.getDate());
+    const month = setTwoDigits(date.getMonth() + 1);
+    setMonth(month);
+    setYear(`${date.getFullYear()}`);
     setCurrentDate(`${day}/${month}/${date.getFullYear()}`);
+    dispatch(loadAccounts(month, year));
   };
 
   const sumTotalValue = () => {
