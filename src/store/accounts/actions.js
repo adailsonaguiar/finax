@@ -6,16 +6,15 @@ import {
 } from './actionTypes';
 
 export const loadAccounts = (month, year) => {
-  console.log(`${month}/${year}`);
   return dispatch => {
-    dispatch({type: 'LOAD_ACCOUNTS'});
+    dispatch({type: LOAD_ACCOUNTS});
     getRealm()
       .then(date => {
-        //const data = date.objects('contas').sorted('id', 1);
-        const data = date
+        const data = date.objects('contas').sorted('id', 1);
+        /* const data = date
           .objects('contas')
           .filtered(`month = '${month}' AND year = '${year}'`)
-          .sorted('id', 1);
+          .sorted('id', 1); */
         loadAccountsSuccess(dispatch, data);
       })
       .catch(error => {

@@ -68,6 +68,9 @@ import NovaDespesa from './pages/NovaDespesa/NovaDespesa';
 export default createAppContainer(
   createStackNavigator(
     {
+      Dash: {
+        screen: Dash,
+      },
       Contas: {
         screen: Contas,
       },

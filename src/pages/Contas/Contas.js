@@ -30,15 +30,13 @@ const Carteiras = ({navigation}) => {
   const [arrayAccounts] = useState(accountsUtil);
   const [currentDate, setCurrentDate] = useState('');
   const [totalValue, setTotalValue] = useState(0);
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
   const dispatch = useDispatch();
   const accounts = useSelector(state => state.accounts.accounts);
 
   useEffect(() => {
     getDate().then(date => {
       setCurrentDate(`${date.day}/${date.month}/${date.year}`);
-      dispatch(loadAccounts(month, year));
+      dispatch(loadAccounts(date.month, date.year));
     });
     sumTotalValue();
   }, []);
@@ -86,7 +84,7 @@ const Carteiras = ({navigation}) => {
   return (
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
-      <Header title="Dezembro" />
+      <Header title="Finax" />
       <HerderList>
         <TitleComponent>SUAS CONTAS</TitleComponent>
         <TxtDate>{currentDate}</TxtDate>
@@ -108,7 +106,9 @@ const Carteiras = ({navigation}) => {
               </ColLeft>
               <ColRight>
                 <Saldo>R${`${formatMoney(item.balance)}`}</Saldo>
-                <Atualizado>{`${item.day}/${item.month}/${item.year}`}</Atualizado>
+                <Atualizado>
+                  Atualizado: {`${item.day}/${item.month}/${item.year}`}
+                </Atualizado>
               </ColRight>
             </Conta>
           )}
