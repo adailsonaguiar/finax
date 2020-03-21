@@ -4,12 +4,10 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import Dash from './pages/Dash/Dash';
-import Despesas from './pages/Despesas';
+import Transacoes from './pages/Transacoes';
 import Contas from './pages/Contas/Contas';
 import ContaForm from './pages/ContaForm/ContaForm';
-
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import NovaDespesa from './pages/NovaDespesa/NovaDespesa';
+import DespesaForm from './pages/DespesaForm';
 
 /* const BottomTab = createBottomTabNavigator(
   {
@@ -78,6 +76,8 @@ export default createAppContainer(
       ContaForm: {
         screen: ContaForm,
       },
+      Transacoes: {screen: Transacoes},
+      DespesaForm: {screen: DespesaForm},
     },
     {
       headerMode: 'none',

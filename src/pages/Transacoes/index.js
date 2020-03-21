@@ -26,7 +26,7 @@ import {
   TxtNovaConta,
 } from './styles';
 
-const Carteiras = ({navigation}) => {
+const Transacoes = ({navigation}) => {
   const [arrayAccounts] = useState(accountsUtil);
   const [currentDate, setCurrentDate] = useState('');
   const [totalValue, setTotalValue] = useState(0);
@@ -52,9 +52,9 @@ const Carteiras = ({navigation}) => {
   return (
     <Container>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
-      <Header title="Finax" />
+      <Header />
       <HerderList>
-        <TitleComponent>SUAS CONTAS</TitleComponent>
+        <TitleComponent>SUAS TRANSAÇÕES</TitleComponent>
         <TxtDate>{currentDate}</TxtDate>
       </HerderList>
       <Lista>
@@ -85,15 +85,9 @@ const Carteiras = ({navigation}) => {
       </Lista>
       <Footer>
         <SaldoTotal>Saldo das contas: R$ {totalValue}</SaldoTotal>
-        <BtnNovaConta
-          onPress={() => {
-            navigation.navigate('ContaForm', {});
-          }}>
-          <TxtNovaConta>Adicionar Conta</TxtNovaConta>
-        </BtnNovaConta>
       </Footer>
     </Container>
   );
 };
 
-export default Carteiras;
+export default Transacoes;
