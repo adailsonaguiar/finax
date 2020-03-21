@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Text, View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import Header from '../../components/Header/Header';
-import {Container, CompHead, TitleGrid} from './styles';
-import getRealm from '../../services/realm';
+import Tabs from '../../components/Tabs';
+
+import {Container, CompHead, TitleGrid, TxtSaldo, TxtDescricao} from './styles';
 
 import {
   Transacao,
@@ -12,26 +13,17 @@ import {
   TitleTransacao,
 } from '../../components/TransacaoStyles';
 
-export default  Dash = () => {
+export default Dash = () => {
   const [transactions, setTransactions] = useState([]);
-
-  useEffect(() => loadRepositories(), []);
-
-  async function loadRepositories() {
-    console.log('consultando transações');
-    const realm = await getRealm();
-    const data = realm.objects('transaction').sorted('id', 1);
-
-    setTransactions(data);
-  }
 
   return (
     <Container>
-      <Header  />
-      <StatusBar barStyle="dark-content" backgroundColor="#f2f2f2" />
+      <Header title="Finax" />
+      <StatusBar barStyle="light-content" backgroundColor="#121212" />
       <CompHead>
-        <Text style={styles.txtSaldo}>R$ 9.857,96</Text>
-        <Text style={styles.txtDescricao}>Saldo Receitas</Text>
+        <TxtDescricao>Saldo Receitas</TxtDescricao>
+        <TxtSaldo>R$ 9.857,96</TxtSaldo>
+        <Tabs />
       </CompHead>
       <TitleGrid>HISTÓRICO</TitleGrid>
       <ScrollView>
