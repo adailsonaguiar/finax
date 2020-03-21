@@ -8,6 +8,7 @@ import getRealm from './../../services/realm';
 import accounts from '../../utils/accounts';
 import {useDispatch} from 'react-redux';
 import {loadAccounts} from '../../store/accounts/actions';
+import {getDate} from '../../utils/FunctionUtils';
 
 import {
   Container,
@@ -40,9 +41,17 @@ export default function ContaForm({navigation}) {
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(0);
   const [isEdition, setEdit] = useState(false);
+  const [day, setday] = useState('');
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
+    getDate().then(date => {
+      setday(date.day);
+      setMonth(date.month);
+      setYear(date.year);
+    });
     const detectionAccountParams = () => {
       if (state.params.account) {
         setEdit(true);
@@ -86,17 +95,6 @@ export default function ContaForm({navigation}) {
     }
   };
 
-  const getDate = () => {
-    const date = new Date();
-    const day =
-      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    const month =
-      date.getMonth() < 10
-        ? `0${date.getMonth() + 1}`
-        : `${date.getMonth() + 1}`;
-    return {day: `${day}`, month: `${month}`, year: `${date.getFullYear()}`};
-  };
-
   const formatBalance = balance => {
     if (typeof balance == 'string') {
       const removedChar = balance
@@ -118,7 +116,7 @@ export default function ContaForm({navigation}) {
   };
 
   const handleLoadAccounts = () => {
-    dispatch(loadAccounts());
+    dispatch(loadAccounts(month, year));
   };
 
   const saveAccount = async account => {
@@ -161,7 +159,6 @@ export default function ContaForm({navigation}) {
       idAccount = idMaxAccount;
     }
     if (validateForm()) {
-      const {day, month, year} = getDate();
       const data = {
         id: idAccount,
         day,
@@ -203,7 +200,7 @@ export default function ContaForm({navigation}) {
       realm.write(() => {
         realm.delete(realm.objectForPrimaryKey('contas', id));
         setLoading(false);
-        state.params.loadAccounts();
+        handleLoadAccounts();
         navigation.goBack();
       });
     } catch (e) {

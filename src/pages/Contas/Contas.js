@@ -4,7 +4,7 @@ import Header from '../../components/Header/Header';
 import accountsUtil from '../../utils/accounts';
 import {useDispatch, useSelector} from 'react-redux';
 import {loadAccounts} from '../../store/accounts/actions';
-import {setTwoDigits} from '../../utils/FunctionUtils';
+import {getDate} from '../../utils/FunctionUtils';
 
 import {
   Container,
@@ -36,19 +36,12 @@ const Carteiras = ({navigation}) => {
   const accounts = useSelector(state => state.accounts.accounts);
 
   useEffect(() => {
-    getDate();
+    getDate().then(date => {
+      setCurrentDate(`${date.day}/${date.month}/${date.year}`);
+      dispatch(loadAccounts(month, year));
+    });
     sumTotalValue();
   }, []);
-
-  const getDate = () => {
-    const date = new Date();
-    const day = setTwoDigits(date.getDate());
-    const month = setTwoDigits(date.getMonth() + 1);
-    setMonth(month);
-    setYear(`${date.getFullYear()}`);
-    setCurrentDate(`${day}/${month}/${date.getFullYear()}`);
-    dispatch(loadAccounts(month, year));
-  };
 
   const sumTotalValue = () => {
     let sumValue = 0;

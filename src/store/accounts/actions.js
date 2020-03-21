@@ -16,11 +16,9 @@ export const loadAccounts = (month, year) => {
           .objects('contas')
           .filtered(`month = '${month}' AND year = '${year}'`)
           .sorted('id', 1);
-        console.log(data);
         loadAccountsSuccess(dispatch, data);
       })
       .catch(error => {
-        console.log(error);
         loadAccountsFailure(dispatch);
       });
   };
