@@ -12,6 +12,7 @@ export default class TransactionSchema {
       type: 'string',
       accountId: 'int',
       status: 'int',
+      category: 'int',
     },
   };
 }
