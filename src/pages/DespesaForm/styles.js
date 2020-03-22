@@ -72,7 +72,7 @@ export const Input = styled.TextInput.attrs({
   font-size: 17px;
 `;
 export const BtnNovaConta = styled.TouchableOpacity`
-  background: #03dac5;
+  background: #e74c3c;
   height: 61px;
   align-items: center;
   justify-content: center;
@@ -82,16 +82,7 @@ export const LabelBtn = styled.Text`
   font-family: Roboto-Bold;
   font-size: 18px;
 `;
-export const ImgConta = styled.Image`
-  width: 80px;
-  height: 80px;
-`;
-export const ContainerIcon = styled.View`
-  flex: 3;
-  justify-content: flex-end;
-  align-items: center;
-  padding-bottom: 10px;
-`;
+
 export const ContainerFormFooter = styled.View`
   justify-content: center;
   align-items: center;

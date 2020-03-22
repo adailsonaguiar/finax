@@ -9,6 +9,7 @@ import accounts from '../../utils/accounts';
 import {useDispatch} from 'react-redux';
 import {loadAccounts} from '../../store/accounts/actions';
 import {getDate} from '../../utils/FunctionUtils';
+import categories from '../../utils/categoriesTransactions';
 
 import {
   Container,
@@ -37,7 +38,7 @@ export default function DespesaForm({navigation}) {
   const [description, setDescription] = useState('');
   const [balance, setBalance] = useState(0);
   const [account, setAccount] = useState('');
-  const [icon, setIcon] = useState(standard_icon);
+  const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(0);
   const [isEdition, setEdit] = useState(false);
@@ -47,6 +48,7 @@ export default function DespesaForm({navigation}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(categories);
     getDate().then(date => {
       setday(date.day);
       setMonth(date.month);
@@ -223,26 +225,7 @@ export default function DespesaForm({navigation}) {
           <Icon name="close" color="#fff" size={30} />
         </BtnFechar>
       </HeaderForm>
-      <ContainerIcon>
-        <ImgConta source={icon} />
-      </ContainerIcon>
       <Form>
-        <InputContainer>
-          <Picker
-            selectedValue={account}
-            onValueChange={selected => {
-              setPropertyAccount(selected);
-            }}
-            style={styles.input}>
-            <Picker.Item label="Carteira" value="000" />
-            <Picker.Item label="Banco do Brasil - 001" value="001" />
-            <Picker.Item label="Caixa Econômica - 104" value="104" />
-            <Picker.Item label="Nuconta - 260" value="260" />
-            <Picker.Item label="Bradesco - 204" value="204" />
-            <Picker.Item label="Santander - 033" value="033" />
-            <Picker.Item label="Itaú - 341" value="341" />
-          </Picker>
-        </InputContainer>
         <Input
           placeholder="Descrição"
           value={description}
@@ -250,6 +233,20 @@ export default function DespesaForm({navigation}) {
             setDescription(description);
           }}
         />
+        <InputContainer>
+          <Picker
+            selectedValue={account}
+            onValueChange={selected => {
+              console.log(selected);
+              setCategory(selected);
+            }}
+            style={styles.input}>
+            {categories.map(category => (
+              <Picker.Item label="teste" value={category.label} />
+            ))}
+          </Picker>
+        </InputContainer>
+
         <InputContainer>
           <TextInputMask
             type={'money'}
