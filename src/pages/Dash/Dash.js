@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadAccounts} from '../../store/accounts/actions';
 import Header from '../../components/Header/Header';
 import Tabs from '../../components/Tabs';
 
@@ -12,6 +14,10 @@ import {
 } from './styles';
 
 export default Dash = ({navigation}) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadAccounts());
+  });
   return (
     <Container>
       <Header title="Finax" />

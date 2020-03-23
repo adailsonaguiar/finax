@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import {StyleSheet} from 'react-native';
 import colors from '../../styles/colors';
+import {TextInputMask} from 'react-native-masked-text';
 
 export const Container = styled.View`
   flex: 1;
@@ -71,6 +72,11 @@ export const Input = styled.TextInput.attrs({
   color: white;
   font-size: 17px;
 `;
+
+export const InputMask = styled(TextInputMask).attrs({
+  placeholderTextColor: '#95a5a6',
+})``;
+
 export const BtnNovaConta = styled.TouchableOpacity`
   background: #e74c3c;
   height: 61px;

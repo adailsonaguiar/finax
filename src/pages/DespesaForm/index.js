@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {StatusBar, ActivityIndicator, Alert} from 'react-native';
-import {TextInputMask} from 'react-native-masked-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import messageResponse from './../../utils/messageResponse';
 import colors from '../../styles/colors';
 import getRealm from './../../services/realm';
-import accounts from '../../utils/accounts';
-import {useDispatch} from 'react-redux';
-import {loadAccounts} from '../../store/accounts/actions';
+import {useDispatch, useSelector} from 'react-redux';
 import {getDate} from '../../utils/FunctionUtils';
+import accountsArr from '../../utils/accounts';
 import categories from '../../utils/categoriesTransactions';
 
 import {
@@ -28,17 +26,20 @@ import {
   BtnRemove,
   LabelBtnRemove,
   ContainerFormFooter,
+  InputMask,
 } from './styles';
 
 import standard_icon from './../../assets/contas/standard_icon.png';
 
 export default function DespesaForm({navigation}) {
   const {state} = navigation;
-  const [contas] = useState(accounts);
+  const [contas] = useState('');
   const [description, setDescription] = useState('');
-  const [balance, setBalance] = useState(0);
-  const [account, setAccount] = useState('');
   const [category, setCategory] = useState('');
+  const [date, setDate] = useState('');
+  const [idAccount, setIdAccount] = useState('');
+  const [balance, setBalance] = useState('');
+  const [account, setAccount] = useState('');
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState(0);
   const [isEdition, setEdit] = useState(false);
@@ -46,9 +47,13 @@ export default function DespesaForm({navigation}) {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const dispatch = useDispatch();
+  const [arrayAccounts] = useState(accountsArr);
+  const accounts = useSelector(state => state.accounts.accounts);
 
   useEffect(() => {
-    console.log(categories);
+    Object.keys(accounts).map(value =>
+      console.log(arrayAccounts[accounts[value].account].label),
+    );
     getDate().then(date => {
       setday(date.day);
       setMonth(date.month);
@@ -235,21 +240,54 @@ export default function DespesaForm({navigation}) {
         />
         <InputContainer>
           <Picker
-            selectedValue={account}
+            selectedValue={category}
             onValueChange={selected => {
-              console.log(selected);
               setCategory(selected);
             }}
             style={styles.input}>
             {categories.map(category => (
-              <Picker.Item label="teste" value={category.label} />
+              <Picker.Item
+                key={category}
+                label={category.label}
+                value={category.label}
+              />
             ))}
           </Picker>
         </InputContainer>
-
         <InputContainer>
-          <TextInputMask
+          <InputMask
+            type={'datetime'}
+            placeholder="Digite uma data"
+            value={date}
+            options={{
+              format: 'DD/MM/YYYY',
+            }}
+            onChangeText={maskedText => {
+              setDate(maskedText);
+            }}
+            style={styles.input}
+          />
+        </InputContainer>
+        <InputContainer>
+          <Picker
+            selectedValue={idAccount}
+            onValueChange={selected => {
+              setIdAccount(selected);
+            }}
+            style={styles.input}>
+            {Object.keys(accounts).map(value => (
+              <Picker.Item
+                key={category}
+                label={arrayAccounts[accounts[value].account].label}
+                value={value}
+              />
+            ))}
+          </Picker>
+        </InputContainer>
+        <InputContainer>
+          <InputMask
             type={'money'}
+            placeholder="Digite o valor"
             options={{
               precision: 2,
               separator: ',',
